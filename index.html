@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animated Glassmorphism Nav Bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Montserrat Font -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      min-height: 100vh;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Noise Animation Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.10;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      animation: noise-anim 1.5s steps(8) infinite;
+    }
+
+    @keyframes noise-anim {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
+    }
+
+    /* NAV BAR Glassmorphism */
+    .navbar {
+      position: relative;
+      z-index: 10;
+      margin: 2vw auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(32,32,32,0.55);
+      box-shadow: 0 8px 24px 0 rgba(0,0,0,0.15), 0 1.5px 6px 0 rgba(255,192,0,0.15);
+      backdrop-filter: blur(18px) saturate(160%);
+      border-radius: 50%;
+      transition: border-radius 0.3s cubic-bezier(.51,.92,.24,.99);
+      padding: 10px 24px;
+      width: fit-content;
+      min-width: 220px;
+      border: 1px solid rgba(255,255,255,0.14);
+      animation: navbar-pop 1.2s cubic-bezier(.61,.1,.4,1.1);
+    }
+
+    @keyframes navbar-pop {
+      0% { transform: scale(0.6) translateY(-60px); opacity:0; }
+      65%{ transform: scale(1.05) translateY(10px);}
+      100% { transform: scale(1) translateY(0); opacity: 1;}
+    }
+
+    /* Logo Frame */
+    .nav-logo-frame {
+      border: 2px solid #FFC000;
+      border-radius: 50%;
+      width: 46px; height: 46px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+      background: rgba(255,255,255,0.05);
+      box-shadow: 0 0 0 2px rgba(255,192,0,0.10);
+      transition: box-shadow 0.25s;
+      flex-shrink: 0;
+    }
+    .nav-logo-frame img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+
+    /* Nav Text & Dot */
+    .nav-status-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 300;
+      font-size: 17px;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .nav-status-dot {
+      width: 10px; height: 10px;
+      background: #FFBF00;
+      border-radius: 50%;
+      margin-left: 2px;
+      box-shadow: 0 0 8px 2px #FFBF00AA;
+      position: relative;
+      animation: pulse-dot 1.2s infinite alternate cubic-bezier(.71,.02,0,1.1);
+    }
+    @keyframes pulse-dot {
+      0% { box-shadow: 0 0 10px 2px #FFBF00BB, 0 0 0 0 #ffc00000;}
+      100% { box-shadow: 0 0 18px 7px #FFBF0077, 0 0 8px 4px #ffc00044;}
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      margin-left: 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 38px;
+      width: 38px;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      outline: none;
+      transition: background 0.22s;
+      user-select: none;
+    }
+    .nav-hamburger:active { background: rgba(255,255,255,0.09); border-radius: 50%; }
+    .nav-hamburger-line {
+      width: 22px; height: 2px;
+      background: #fff;
+      border-radius: 1.5px;
+      transition: all 0.32s cubic-bezier(.63,.11,.16,1.1);
+    }
+
+    /* Hamburger animation open */
+    .menu-open .nav-hamburger-line:nth-child(1) {
+      transform: translateY(4px) rotate(25deg);
+      background: #FFBF00;
+    }
+    .menu-open .nav-hamburger-line:nth-child(2) {
+      transform: translateY(-4px) rotate(-25deg);
+      background: #FFBF00;
+    }
+
+    /* Mobile/Tablet Menu List */
+    .nav-menu-mobile {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.97) translateY(10px);
+      background: rgba(25,25,25,0.88);
+      backdrop-filter: blur(22px) saturate(160%);
+      border-radius: 36px;
+      min-width: 165px;
+      width: max-content;
+      box-shadow: 0 8px 28px 0 rgba(0,0,0,0.18), 0 1.5px 6px 0 rgba(255,192,0,0.10);
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s, transform 0.25s cubic-bezier(.61,.1,.4,1.1);
+      z-index: 20;
+      border: 1px solid rgba(255,255,255,0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .menu-open .nav-menu-mobile {
+      opacity: 1;
+      transform: translateX(-50%) scale(1) translateY(14px);
+      pointer-events: auto;
+    }
+    .nav-menu-mobile a {
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      text-decoration: none;
+      padding: 13px 32px;
+      text-align: center;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: color .17s, background .18s;
+      background: transparent;
+    }
+    .nav-menu-mobile a:last-child { border-bottom: none; }
+    .nav-menu-mobile a:hover {
+      color: #FFBF00;
+      background: rgba(255,191,0,0.06);
+    }
+
+    /* Desktop Nav */
+    @media (min-width: 900px) {
+      .navbar {
+        flex-direction: row;
+        justify-content: flex-start;
+        border-radius: 50%;
+        background: rgba(8,8,8,0.72);
+        min-width: 540px;
+        max-width: 920px;
+        padding: 10px 36px;
+      }
+      .nav-logo-frame { margin-right: 16px; }
+      .nav-status-wrapper { margin-right: 30px; }
+      .nav-hamburger { display: none; }
+
+      .nav-menu-desktop {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 24px;
+      }
+      .nav-menu-desktop a {
+        padding: 10px 24px;
+        border-radius: 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 17px;
+        color: #fff;
+        text-decoration: none;
+        background: transparent;
+        box-shadow: 0 2px 16px 0 rgba(255,191,0,0.04), 0 0.5px 2px 0 rgba(255,192,0,0.07);
+        transition: color .16s, background .18s, box-shadow .2s;
+        display: inline-block;
+        margin-right: 6px;
+        position: relative;
+        z-index: 1;
+      }
+      .nav-menu-desktop a:last-child { margin-right: 0; }
+      .nav-menu-desktop a:hover {
+        color: #FFBF00;
+        background: rgba(255,191,0,0.10);
+        box-shadow: 0 4px 18px 0 rgba(255,191,0,0.10);
+      }
+      /* Hide mobile menu */
+      .nav-menu-mobile { display: none !important; }
+    }
+
+    /* Responsive Navbar: Glassmorphism + border radius */
+    @media (max-width: 899px) {
+      .navbar {
+        border-radius: 50%;
+        width: 92vw;
+        max-width: 440px;
+        padding: 8px 14px;
+      }
+    }
+
+    /* Make nav bar sticky for demo */
+    .navbar {
+      position: sticky;
+      top: 24px;
+      left: 0;
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo-frame">
+      <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg" alt="Profile Logo">
+    </div>
+    <div class="nav-status-wrapper">
+      <span class="nav-status-text">(Available for work)</span>
+      <span class="nav-status-dot"></span>
+    </div>
+    <!-- Hamburger for mobile -->
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span class="nav-hamburger-line"></span>
+      <span class="nav-hamburger-line"></span>
+    </button>
+    <!-- Mobile menu -->
+    <div class="nav-menu-mobile" id="navMenuMobile">
+      <a href="#projects">Projects</a>
+      <a href="#paintings">Paintings</a>
+      <a href="#blogs">Blogs</a>
+      <a href="#hireme">Hire me</a>
+    </div>
+    <!-- Desktop menu -->
+    <div class="nav-menu-desktop">
+      <a href="#projects">Projects</a>
+      <a href="#paintings">Paintings</a>
+      <a href="#blogs">Blogs</a>
+      <a href="#hireme">Hire me</a>
+    </div>
+  </nav>
+
+  <script>
+    // Hamburger for mobile/tablet
+    const navbar = document.getElementById('navbar');
+    const navHamburger = document.getElementById('navHamburger');
+    const navMenuMobile = document.getElementById('navMenuMobile');
+
+    function closeMenuOnOutsideClick(e) {
+      if (!navbar.contains(e.target)) {
+        navbar.classList.remove('menu-open');
+      }
+    }
+
+    navHamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navbar.classList.toggle('menu-open');
+      if (navbar.classList.contains('menu-open')) {
+        document.addEventListener('mousedown', closeMenuOnOutsideClick);
+      } else {
+        document.removeEventListener('mousedown', closeMenuOnOutsideClick);
+      }
+    });
+
+    // Close menu on resize to desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 900) {
+        navbar.classList.remove('menu-open');
+      }
+    });
+
+    // For nav animation on hover (desktop only)
+    if (window.matchMedia('(min-width: 900px)').matches) {
+      const nav = document.querySelector('.navbar');
+      nav.addEventListener('mouseenter', () => {
+        nav.style.boxShadow = '0 12px 32px 0 rgba(255,191,0,0.16), 0 2px 8px 0 rgba(255,192,0,0.12)';
+      });
+      nav.addEventListener('mouseleave', () => {
+        nav.style.boxShadow = '0 8px 24px 0 rgba(0,0,0,0.15), 0 1.5px 6px 0 rgba(255,192,0,0.15)';
+      });
+    }
+  </script>
+</body>
+</html>
