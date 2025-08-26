@@ -15,24 +15,23 @@
       --glass: rgba(255,255,255,0.06);
       --glass-stroke: rgba(255,255,255,0.16);
       --blur: 18px;
-      --yellow: #FFC000; /* frame + accents */
-      --hover: #FFBF00; /* hover text */
+      --yellow: #FF0; /* active dot + border + hover color */
+      --hover: #FF0;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
       --nav-radius: 50px;
       --menu-item-radius: 20%;
-      --noise-opacity: .08; /* tweak to go darker/lighter */
+      --noise-opacity: .08;
     }
 
-    /* ===== Base + background noise (isolated) ===== */
     html, body {
       height: 100%;
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: "Montserrat", sans-serif;
     }
 
-    /* Full-page animated noise layer that won't affect layout/interactions */
+    /* Background noise */
     body::before{
       content:"";
       position: fixed;
@@ -40,9 +39,7 @@
       pointer-events: none;
       z-index: -1;
       opacity: var(--noise-opacity);
-      mix-blend-mode: normal;
       background:
-        /* fine grain */
         url("data:image/svg+xml;utf8,\
         <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
           <filter id='n'>\
@@ -59,14 +56,6 @@
       100%{ transform: translate3d(-3%,2%,0) }
     }
 
-    /* ===== Layout helpers ===== */
-    .wrap{
-      max-width: 1100px;
-      margin: 20px auto 80px;
-      padding: 0 14px;
-    }
-
-    /* ===== Glass Nav (mobile & tablet default) ===== */
     .nav{
       position: relative;
       display: flex;
@@ -82,58 +71,45 @@
       box-shadow: var(--shadow);
     }
 
-    /* Center group (logo + status text) */
     .center{
       display: grid;
       grid-auto-flow: column;
       align-items: center;
       gap: 10px;
-      min-width: 0;
     }
-
     .logo-ring{
       width: 44px;
       height: 44px;
       border-radius: 999px;
-      padding: 2px; /* thin ring */
-      background:
-        radial-gradient(100% 100% at 50% 0%, #FFD452 0%, var(--yellow) 100%);
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,.35) inset,
-        0 0 0 1px rgba(255,192,0,.35);
+      padding: 2px;
+      background: var(--yellow); /* yellow border */
     }
     .logo-ring img{
       width: 100%;
       height: 100%;
-      display: block;
       border-radius: 999px;
       object-fit: cover;
-      border: 1px solid rgba(0,0,0,.35);
     }
-
     .status{
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: 300; /* Montserrat 300 */
-      white-space: nowrap;
+      font-weight: 300;
       font-size: 0.95rem;
-      letter-spacing: .2px;
     }
     .dot{
       width: 8px;
       height: 8px;
-      border-radius: 999px;
-      background: #6CFF5A;
+      border-radius: 50%;
+      background: var(--yellow); /* active dot color */
       position: relative;
-      box-shadow: 0 0 0 1px rgba(0,0,0,.4) inset;
     }
     .dot::after{
       content:"";
       position:absolute;
       inset:-6px;
       border-radius:inherit;
-      border:1px solid rgba(108,255,90,.65);
+      border:1px solid rgba(255,255,0,.65);
       animation: ping 1.8s cubic-bezier(.2,.8,.2,1) infinite;
     }
     @keyframes ping{
@@ -141,42 +117,48 @@
       100%{ opacity:0; transform: scale(1.6) }
     }
 
-    /* Two-line “Apple-ish” hamburger */
+    /* Hamburger */
     .hamburger{
-      margin-left: auto; /* push to the far right on mobile */
+      margin-left: auto;
       width: 28px;
       height: 20px;
       display: inline-grid;
       align-content: center;
-      gap: 6px;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
       border: none;
       background: transparent;
+      position: relative;
     }
     .hamburger .line{
-      height: 1px; /* thin */
+      height: 2px;
       width: 100%;
       background: #fff;
       border-radius: 2px;
-      transform-origin: center;
-      transition: transform .35s ease, opacity .2s ease;
+      position: absolute;
+      left: 0;
+      transition: all .35s ease;
+    }
+    .hamburger .line1{ top: 4px; }
+    .hamburger .line2{ bottom: 4px; }
+    .hamburger.active .line1{
+      transform: rotate(45deg);
+      top: 9px;
+    }
+    .hamburger.active .line2{
+      transform: rotate(-45deg);
+      bottom: 9px;
     }
 
-    /* Menu (slides from nav background) */
+    /* Menu */
     .menu{
       position: absolute;
       left: 8px;
       right: 8px;
       top: calc(100% + 10px);
-      background: var(--glass);
+      background: #000;
       border: 1px solid var(--glass-stroke);
       border-radius: 20px;
-      backdrop-filter: blur(var(--blur));
-      -webkit-backdrop-filter: blur(var(--blur));
       box-shadow: var(--shadow);
-      overflow: hidden;
-
       transform-origin: top;
       transform: scaleY(0.8);
       opacity: 0;
@@ -187,7 +169,7 @@
       transform: scaleY(1);
       opacity: 1;
       visibility: visible;
-      transition: transform .38s cubic-bezier(.2,.8,.2,1), opacity .38s ease, visibility 0s;
+      transition: transform .38s ease, opacity .38s ease;
     }
     .menu ul{
       margin: 0;
@@ -201,50 +183,28 @@
       padding: 12px 14px;
       color: #fff;
       text-decoration: none;
-      font-weight: 300; /* Montserrat thin (request) on mobile menu */
+      text-align: center;
+      font-weight: 300; /* thin by default */
       border-radius: 14px;
-      transition: color .18s ease, background-color .18s ease, transform .18s ease;
+      transition: color .18s ease, background-color .18s ease, font-weight .18s ease;
     }
     .menu a:hover{
-      color: var(--hover);
+      color: var(--hover); /* yellow hover */
       background-color: rgba(255,255,255,0.04);
-      transform: translateY(-1px);
+      font-weight: 700; /* bold on hover */
     }
 
-    /* ===== Desktop layout ===== */
     @media (min-width: 900px){
-      .nav{
-        justify-content: flex-start;
-        padding: 12px 18px;
-        background: rgba(0,0,0,0.5);              /* black glass for desktop */
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: var(--nav-radius);
-        gap: 16px;
-      }
-      .center{
-        justify-content: flex-start;
-      }
-      .status{
-        font-size: 1rem;
-      }
-
-      /* Put status dot right next to the text on desktop too */
-      .status .dot{ margin-left: 2px; }
-
-      /* Desktop menu becomes inline, with bold labels + transparent bg + shadow */
+      .nav{ justify-content: flex-start; }
       .hamburger{ display: none; }
-
       .menu{
         position: static;
         background: transparent;
         border: 0;
         box-shadow: none;
-        overflow: visible;
         transform: none;
         opacity: 1;
         visibility: visible;
-        transition: none;
-        margin-left: 26px; /* gap after logo+status */
       }
       .menu ul{
         display: inline-grid;
@@ -253,68 +213,38 @@
         padding: 0;
       }
       .menu a{
-        font-weight: 700; /* Montserrat bold (desktop request) */
+        font-weight: 300; /* thin default on desktop too */
         border-radius: var(--menu-item-radius);
         background: transparent;
-        box-shadow: 0 8px 26px rgba(0,0,0,.35); /* background shadow on the item */
+        box-shadow: 0 8px 26px rgba(0,0,0,.35);
         padding: 10px 14px;
       }
       .menu a:hover{
         color: var(--hover);
         background: rgba(255,255,255,0.04);
+        font-weight: 700; /* bold on hover */
       }
-    }
-
-    /* ===== Demo page filler (safe to delete) ===== */
-    main{
-      max-width: 900px;
-      margin: 28px auto 0;
-      padding: 0 14px;
-      line-height: 1.6;
-      color: #cfcfcf;
-    }
-    .spacer{
-      height: 120vh;
-      background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.02) 100%);
-      border-radius: 16px;
-    }
-
-    /* ===== Accessibility focus ===== */
-    a, button{
-      outline: none;
-    }
-    a:focus-visible, button:focus-visible{
-      box-shadow: 0 0 0 2px rgba(255,255,255,.65), 0 0 0 4px rgba(255,191,0,.65);
-      border-radius: 12px;
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- ===== NAVBAR ===== -->
-    <nav class="nav" aria-label="Primary">
-      <!-- Center group (mobile/tablet centered, desktop left) -->
+    <nav class="nav">
       <div class="center">
-        <div class="logo-ring" aria-hidden="true">
-          <img
-            src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg"
-            alt="Profile logo">
+        <div class="logo-ring">
+          <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg" alt="Profile logo">
         </div>
-
-        <div class="status" aria-label="Availability">
+        <div class="status">
           <span>Available for work</span>
-          <span class="dot" aria-hidden="true"></span>
+          <span class="dot"></span>
         </div>
       </div>
 
-      <!-- Two-line hamburger (mobile/tablet) -->
       <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="menu">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="sr-only" style="position:absolute;left:-9999px">Toggle menu</span>
+        <span class="line line1"></span>
+        <span class="line line2"></span>
       </button>
 
-      <!-- Menu -->
       <div class="menu" id="menu">
         <ul>
           <li><a href="#projects">Projects</a></li>
@@ -324,53 +254,16 @@
         </ul>
       </div>
     </nav>
-
-    <!-- ===== PAGE CONTENT (demo) ===== -->
-    <main>
-      <h1 style="font-weight:700; letter-spacing:.2px; margin: 10px 0 8px;">Hello, Muktadir</h1>
-      <p>Drop this nav into your site. The background is true black with a subtle animated grain. On mobile and tablet, the logo + status sit centered and the 2-line hamburger sits to the right. The menu blooms out from the same glass surface. On desktop, the bar turns into a black glass strip with the menu inline, bold labels, transparent chips, and a soft backdrop shadow.</p>
-      <div class="spacer"></div>
-    </main>
   </div>
 
   <script>
-    // Simple menu toggler for mobile/tablet
-    (function(){
-      const btn = document.getElementById('navToggle');
-      const menu = document.getElementById('menu');
-
-      function closeOnOutsideClick(e){
-        if(!menu.contains(e.target) && !btn.contains(e.target)){
-          menu.classList.remove('open');
-          btn.setAttribute('aria-expanded','false');
-          document.removeEventListener('click', closeOnOutsideClick);
-        }
-      }
-
-      btn?.addEventListener('click', function(){
-        const isOpen = menu.classList.toggle('open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        if(isOpen){
-          // slight line animation suggestion (optional)
-          btn.querySelectorAll('.line').forEach((l,i)=>{
-            l.style.transform = i===0 ? 'translateY(1px)' : 'translateY(-1px)';
-            setTimeout(()=>{ l.style.transform=''; }, 200);
-          });
-          setTimeout(()=> document.addEventListener('click', closeOnOutsideClick), 0);
-        }else{
-          document.removeEventListener('click', closeOnOutsideClick);
-        }
-      });
-
-      // Close menu on resize up to desktop
-      const mq = window.matchMedia('(min-width: 900px)');
-      mq.addEventListener?.('change', e=>{
-        if(e.matches){
-          menu.classList.remove('open');
-          btn.setAttribute('aria-expanded','false');
-        }
-      });
-    })();
+    const btn = document.getElementById('navToggle');
+    const menu = document.getElementById('menu');
+    btn.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      btn.classList.toggle('active', isOpen);
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
   </script>
 </body>
 </html>
