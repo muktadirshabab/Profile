@@ -1,327 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Animated Glassmorphism Nav Bar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Montserrat Font -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700&display=swap" rel="stylesheet">
-  <style>
-    /* Reset */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muktadir — Glass Nav</title>
 
+  <!-- Montserrat 300 / 700 -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #000000;
+      --text: #ffffff;
+      --glass: rgba(255,255,255,0.06);
+      --glass-stroke: rgba(255,255,255,0.16);
+      --blur: 18px;
+      --yellow: #FFC000; /* frame + accents */
+      --hover: #FFBF00; /* hover text */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --nav-radius: 50px;
+      --menu-item-radius: 20%;
+      --noise-opacity: .08; /* tweak to go darker/lighter */
+    }
+
+    /* ===== Base + background noise (isolated) ===== */
     html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Full-page animated noise layer that won't affect layout/interactions */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: var(--noise-opacity);
+      mix-blend-mode: normal;
+      background:
+        /* fine grain */
+        url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
+          <filter id='n'>\
+            <feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='3' stitchTiles='stitch'/>\
+            <feColorMatrix type='saturate' values='0'/>\
+          </filter>\
+          <rect width='100%' height='100%' filter='url(%23n)'/>\
+        </svg>") repeat;
+      background-size: 180px 180px;
+      animation: noiseShift 1.8s steps(4) infinite;
+    }
+    @keyframes noiseShift{
+      0%{ transform: translate3d(0,0,0) }
+      100%{ transform: translate3d(-3%,2%,0) }
+    }
+
+    /* ===== Layout helpers ===== */
+    .wrap{
+      max-width: 1100px;
+      margin: 20px auto 80px;
+      padding: 0 14px;
+    }
+
+    /* ===== Glass Nav (mobile & tablet default) ===== */
+    .nav{
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--glass);
+      border: 1px solid var(--glass-stroke);
+      border-radius: var(--nav-radius);
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow);
+    }
+
+    /* Center group (logo + status text) */
+    .center{
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .logo-ring{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      padding: 2px; /* thin ring */
+      background:
+        radial-gradient(100% 100% at 50% 0%, #FFD452 0%, var(--yellow) 100%);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 0 1px rgba(255,192,0,.35);
+    }
+    .logo-ring img{
       width: 100%;
       height: 100%;
-      background: #0a0a0a;
-      min-height: 100vh;
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Noise Animation Background */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.10;
-      background: url('https://grainy-gradients.vercel.app/noise.svg');
-      animation: noise-anim 1.5s steps(8) infinite;
-    }
-
-    @keyframes noise-anim {
-      0% { background-position: 0 0; }
-      100% { background-position: 100px 100px; }
-    }
-
-    /* NAV BAR Glassmorphism */
-    .navbar {
-      position: relative;
-      z-index: 10;
-      margin: 2vw auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(32,32,32,0.55);
-      box-shadow: 0 8px 24px 0 rgba(0,0,0,0.15), 0 1.5px 6px 0 rgba(255,192,0,0.15);
-      backdrop-filter: blur(18px) saturate(160%);
-      border-radius: 50%;
-      transition: border-radius 0.3s cubic-bezier(.51,.92,.24,.99);
-      padding: 10px 24px;
-      width: fit-content;
-      min-width: 220px;
-      border: 1px solid rgba(255,255,255,0.14);
-      animation: navbar-pop 1.2s cubic-bezier(.61,.1,.4,1.1);
-    }
-
-    @keyframes navbar-pop {
-      0% { transform: scale(0.6) translateY(-60px); opacity:0; }
-      65%{ transform: scale(1.05) translateY(10px);}
-      100% { transform: scale(1) translateY(0); opacity: 1;}
-    }
-
-    /* Logo Frame */
-    .nav-logo-frame {
-      border: 2px solid #FFC000;
-      border-radius: 50%;
-      width: 46px; height: 46px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 14px;
-      background: rgba(255,255,255,0.05);
-      box-shadow: 0 0 0 2px rgba(255,192,0,0.10);
-      transition: box-shadow 0.25s;
-      flex-shrink: 0;
-    }
-    .nav-logo-frame img {
-      width: 100%; height: 100%; object-fit: cover;
       display: block;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid rgba(0,0,0,.35);
     }
 
-    /* Nav Text & Dot */
-    .nav-status-wrapper {
-      display: flex;
+    .status{
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-weight: 300;
-      font-size: 17px;
-      color: #fff;
-      letter-spacing: 0.04em;
+      font-weight: 300; /* Montserrat 300 */
+      white-space: nowrap;
+      font-size: 0.95rem;
+      letter-spacing: .2px;
     }
-    .nav-status-dot {
-      width: 10px; height: 10px;
-      background: #FFBF00;
-      border-radius: 50%;
-      margin-left: 2px;
-      box-shadow: 0 0 8px 2px #FFBF00AA;
+    .dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #6CFF5A;
       position: relative;
-      animation: pulse-dot 1.2s infinite alternate cubic-bezier(.71,.02,0,1.1);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.4) inset;
     }
-    @keyframes pulse-dot {
-      0% { box-shadow: 0 0 10px 2px #FFBF00BB, 0 0 0 0 #ffc00000;}
-      100% { box-shadow: 0 0 18px 7px #FFBF0077, 0 0 8px 4px #ffc00044;}
+    .dot::after{
+      content:"";
+      position:absolute;
+      inset:-6px;
+      border-radius:inherit;
+      border:1px solid rgba(108,255,90,.65);
+      animation: ping 1.8s cubic-bezier(.2,.8,.2,1) infinite;
+    }
+    @keyframes ping{
+      0%{ opacity:.8; transform: scale(0.6) }
+      100%{ opacity:0; transform: scale(1.6) }
     }
 
-    /* Hamburger */
-    .nav-hamburger {
-      margin-left: 18px;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 38px;
-      width: 38px;
-      align-items: center;
+    /* Two-line “Apple-ish” hamburger */
+    .hamburger{
+      margin-left: auto; /* push to the far right on mobile */
+      width: 28px;
+      height: 20px;
+      display: inline-grid;
+      align-content: center;
       gap: 6px;
-      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
       border: none;
-      outline: none;
-      transition: background 0.22s;
-      user-select: none;
-    }
-    .nav-hamburger:active { background: rgba(255,255,255,0.09); border-radius: 50%; }
-    .nav-hamburger-line {
-      width: 22px; height: 2px;
-      background: #fff;
-      border-radius: 1.5px;
-      transition: all 0.32s cubic-bezier(.63,.11,.16,1.1);
-    }
-
-    /* Hamburger animation open */
-    .menu-open .nav-hamburger-line:nth-child(1) {
-      transform: translateY(4px) rotate(25deg);
-      background: #FFBF00;
-    }
-    .menu-open .nav-hamburger-line:nth-child(2) {
-      transform: translateY(-4px) rotate(-25deg);
-      background: #FFBF00;
-    }
-
-    /* Mobile/Tablet Menu List */
-    .nav-menu-mobile {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%) scale(0.97) translateY(10px);
-      background: rgba(25,25,25,0.88);
-      backdrop-filter: blur(22px) saturate(160%);
-      border-radius: 36px;
-      min-width: 165px;
-      width: max-content;
-      box-shadow: 0 8px 28px 0 rgba(0,0,0,0.18), 0 1.5px 6px 0 rgba(255,192,0,0.10);
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.22s, transform 0.25s cubic-bezier(.61,.1,.4,1.1);
-      z-index: 20;
-      border: 1px solid rgba(255,255,255,0.16);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .menu-open .nav-menu-mobile {
-      opacity: 1;
-      transform: translateX(-50%) scale(1) translateY(14px);
-      pointer-events: auto;
-    }
-    .nav-menu-mobile a {
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      text-decoration: none;
-      padding: 13px 32px;
-      text-align: center;
-      font-size: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      transition: color .17s, background .18s;
       background: transparent;
     }
-    .nav-menu-mobile a:last-child { border-bottom: none; }
-    .nav-menu-mobile a:hover {
-      color: #FFBF00;
-      background: rgba(255,191,0,0.06);
+    .hamburger .line{
+      height: 1px; /* thin */
+      width: 100%;
+      background: #fff;
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform .35s ease, opacity .2s ease;
     }
 
-    /* Desktop Nav */
-    @media (min-width: 900px) {
-      .navbar {
-        flex-direction: row;
+    /* Menu (slides from nav background) */
+    .menu{
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: calc(100% + 10px);
+      background: var(--glass);
+      border: 1px solid var(--glass-stroke);
+      border-radius: 20px;
+      backdrop-filter: blur(var(--blur));
+      -webkit-backdrop-filter: blur(var(--blur));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+
+      transform-origin: top;
+      transform: scaleY(0.8);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform .28s ease, opacity .28s ease, visibility .28s step-end;
+    }
+    .menu.open{
+      transform: scaleY(1);
+      opacity: 1;
+      visibility: visible;
+      transition: transform .38s cubic-bezier(.2,.8,.2,1), opacity .38s ease, visibility 0s;
+    }
+    .menu ul{
+      margin: 0;
+      padding: 10px;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+    .menu a{
+      display: block;
+      padding: 12px 14px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 300; /* Montserrat thin (request) on mobile menu */
+      border-radius: 14px;
+      transition: color .18s ease, background-color .18s ease, transform .18s ease;
+    }
+    .menu a:hover{
+      color: var(--hover);
+      background-color: rgba(255,255,255,0.04);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Desktop layout ===== */
+    @media (min-width: 900px){
+      .nav{
         justify-content: flex-start;
-        border-radius: 50%;
-        background: rgba(8,8,8,0.72);
-        min-width: 540px;
-        max-width: 920px;
-        padding: 10px 36px;
+        padding: 12px 18px;
+        background: rgba(0,0,0,0.5);              /* black glass for desktop */
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: var(--nav-radius);
+        gap: 16px;
       }
-      .nav-logo-frame { margin-right: 16px; }
-      .nav-status-wrapper { margin-right: 30px; }
-      .nav-hamburger { display: none; }
+      .center{
+        justify-content: flex-start;
+      }
+      .status{
+        font-size: 1rem;
+      }
 
-      .nav-menu-desktop {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-left: 24px;
-      }
-      .nav-menu-desktop a {
-        padding: 10px 24px;
-        border-radius: 20px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        font-size: 17px;
-        color: #fff;
-        text-decoration: none;
+      /* Put status dot right next to the text on desktop too */
+      .status .dot{ margin-left: 2px; }
+
+      /* Desktop menu becomes inline, with bold labels + transparent bg + shadow */
+      .hamburger{ display: none; }
+
+      .menu{
+        position: static;
         background: transparent;
-        box-shadow: 0 2px 16px 0 rgba(255,191,0,0.04), 0 0.5px 2px 0 rgba(255,192,0,0.07);
-        transition: color .16s, background .18s, box-shadow .2s;
-        display: inline-block;
-        margin-right: 6px;
-        position: relative;
-        z-index: 1;
+        border: 0;
+        box-shadow: none;
+        overflow: visible;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        transition: none;
+        margin-left: 26px; /* gap after logo+status */
       }
-      .nav-menu-desktop a:last-child { margin-right: 0; }
-      .nav-menu-desktop a:hover {
-        color: #FFBF00;
-        background: rgba(255,191,0,0.10);
-        box-shadow: 0 4px 18px 0 rgba(255,191,0,0.10);
+      .menu ul{
+        display: inline-grid;
+        grid-auto-flow: column;
+        gap: 8px;
+        padding: 0;
       }
-      /* Hide mobile menu */
-      .nav-menu-mobile { display: none !important; }
+      .menu a{
+        font-weight: 700; /* Montserrat bold (desktop request) */
+        border-radius: var(--menu-item-radius);
+        background: transparent;
+        box-shadow: 0 8px 26px rgba(0,0,0,.35); /* background shadow on the item */
+        padding: 10px 14px;
+      }
+      .menu a:hover{
+        color: var(--hover);
+        background: rgba(255,255,255,0.04);
+      }
     }
 
-    /* Responsive Navbar: Glassmorphism + border radius */
-    @media (max-width: 899px) {
-      .navbar {
-        border-radius: 50%;
-        width: 92vw;
-        max-width: 440px;
-        padding: 8px 14px;
-      }
+    /* ===== Demo page filler (safe to delete) ===== */
+    main{
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding: 0 14px;
+      line-height: 1.6;
+      color: #cfcfcf;
+    }
+    .spacer{
+      height: 120vh;
+      background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.02) 100%);
+      border-radius: 16px;
     }
 
-    /* Make nav bar sticky for demo */
-    .navbar {
-      position: sticky;
-      top: 24px;
-      left: 0;
-      right: 0;
+    /* ===== Accessibility focus ===== */
+    a, button{
+      outline: none;
+    }
+    a:focus-visible, button:focus-visible{
+      box-shadow: 0 0 0 2px rgba(255,255,255,.65), 0 0 0 4px rgba(255,191,0,.65);
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-  <nav class="navbar" id="navbar">
-    <div class="nav-logo-frame">
-      <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg" alt="Profile Logo">
-    </div>
-    <div class="nav-status-wrapper">
-      <span class="nav-status-text">(Available for work)</span>
-      <span class="nav-status-dot"></span>
-    </div>
-    <!-- Hamburger for mobile -->
-    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
-      <span class="nav-hamburger-line"></span>
-      <span class="nav-hamburger-line"></span>
-    </button>
-    <!-- Mobile menu -->
-    <div class="nav-menu-mobile" id="navMenuMobile">
-      <a href="#projects">Projects</a>
-      <a href="#paintings">Paintings</a>
-      <a href="#blogs">Blogs</a>
-      <a href="#hireme">Hire me</a>
-    </div>
-    <!-- Desktop menu -->
-    <div class="nav-menu-desktop">
-      <a href="#projects">Projects</a>
-      <a href="#paintings">Paintings</a>
-      <a href="#blogs">Blogs</a>
-      <a href="#hireme">Hire me</a>
-    </div>
-  </nav>
+  <div class="wrap">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="nav" aria-label="Primary">
+      <!-- Center group (mobile/tablet centered, desktop left) -->
+      <div class="center">
+        <div class="logo-ring" aria-hidden="true">
+          <img
+            src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg"
+            alt="Profile logo">
+        </div>
+
+        <div class="status" aria-label="Availability">
+          <span>Available for work</span>
+          <span class="dot" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- Two-line hamburger (mobile/tablet) -->
+      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="menu">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="sr-only" style="position:absolute;left:-9999px">Toggle menu</span>
+      </button>
+
+      <!-- Menu -->
+      <div class="menu" id="menu">
+        <ul>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#paintings">Paintings</a></li>
+          <li><a href="#blogs">Blogs</a></li>
+          <li><a href="#hire">Hire me</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===== PAGE CONTENT (demo) ===== -->
+    <main>
+      <h1 style="font-weight:700; letter-spacing:.2px; margin: 10px 0 8px;">Hello, Muktadir</h1>
+      <p>Drop this nav into your site. The background is true black with a subtle animated grain. On mobile and tablet, the logo + status sit centered and the 2-line hamburger sits to the right. The menu blooms out from the same glass surface. On desktop, the bar turns into a black glass strip with the menu inline, bold labels, transparent chips, and a soft backdrop shadow.</p>
+      <div class="spacer"></div>
+    </main>
+  </div>
 
   <script>
-    // Hamburger for mobile/tablet
-    const navbar = document.getElementById('navbar');
-    const navHamburger = document.getElementById('navHamburger');
-    const navMenuMobile = document.getElementById('navMenuMobile');
+    // Simple menu toggler for mobile/tablet
+    (function(){
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('menu');
 
-    function closeMenuOnOutsideClick(e) {
-      if (!navbar.contains(e.target)) {
-        navbar.classList.remove('menu-open');
+      function closeOnOutsideClick(e){
+        if(!menu.contains(e.target) && !btn.contains(e.target)){
+          menu.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+          document.removeEventListener('click', closeOnOutsideClick);
+        }
       }
-    }
 
-    navHamburger.addEventListener('click', function(e) {
-      e.stopPropagation();
-      navbar.classList.toggle('menu-open');
-      if (navbar.classList.contains('menu-open')) {
-        document.addEventListener('mousedown', closeMenuOnOutsideClick);
-      } else {
-        document.removeEventListener('mousedown', closeMenuOnOutsideClick);
-      }
-    });
-
-    // Close menu on resize to desktop
-    window.addEventListener('resize', function() {
-      if (window.innerWidth >= 900) {
-        navbar.classList.remove('menu-open');
-      }
-    });
-
-    // For nav animation on hover (desktop only)
-    if (window.matchMedia('(min-width: 900px)').matches) {
-      const nav = document.querySelector('.navbar');
-      nav.addEventListener('mouseenter', () => {
-        nav.style.boxShadow = '0 12px 32px 0 rgba(255,191,0,0.16), 0 2px 8px 0 rgba(255,192,0,0.12)';
+      btn?.addEventListener('click', function(){
+        const isOpen = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if(isOpen){
+          // slight line animation suggestion (optional)
+          btn.querySelectorAll('.line').forEach((l,i)=>{
+            l.style.transform = i===0 ? 'translateY(1px)' : 'translateY(-1px)';
+            setTimeout(()=>{ l.style.transform=''; }, 200);
+          });
+          setTimeout(()=> document.addEventListener('click', closeOnOutsideClick), 0);
+        }else{
+          document.removeEventListener('click', closeOnOutsideClick);
+        }
       });
-      nav.addEventListener('mouseleave', () => {
-        nav.style.boxShadow = '0 8px 24px 0 rgba(0,0,0,0.15), 0 1.5px 6px 0 rgba(255,192,0,0.15)';
+
+      // Close menu on resize up to desktop
+      const mq = window.matchMedia('(min-width: 900px)');
+      mq.addEventListener?.('change', e=>{
+        if(e.matches){
+          menu.classList.remove('open');
+          btn.setAttribute('aria-expanded','false');
+        }
       });
-    }
+    })();
   </script>
 </body>
 </html>
