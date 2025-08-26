@@ -322,11 +322,15 @@ body::before{
     </nav>
   </div>
 <script>
+  // Wait 5 seconds before hiding preloader
   window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
-    preloader.style.opacity = '0';
-    preloader.style.transition = 'opacity 0.5s ease';
-    setTimeout(() => preloader.style.display = 'none', 500);
+
+    setTimeout(() => {
+      preloader.style.opacity = '0';
+      preloader.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => preloader.style.display = 'none', 500);
+    }, 5000); // 5000ms = 5 seconds
   });
 </script>
 
