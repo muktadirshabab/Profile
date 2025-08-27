@@ -336,16 +336,9 @@ body.loaded .shab-m-preloader {
       </div>
     </nav>
   </div>
-  
-<style>
-    /* Hide hero on tablet/desktop */
-    @media (min-width: 768px) {
-      .mobile-hero {
-        display: none;
-      }
-    }
-
-    .mobile-hero {
+ <style>
+    /* Shared hero styling */
+    .hero {
       position: relative;
       width: 100%;
       height: 100vh;
@@ -353,40 +346,73 @@ body.loaded .shab-m-preloader {
       background: black;
     }
 
-    .mobile-hero video,
-    .mobile-hero img {
+    .hero video,
+    .hero img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      pointer-events: none; /* disables right-click interactions */
+      pointer-events: none; /* disable click/save */
     }
 
-    .mobile-hero img {
-      display: none; /* hidden until video ends */
+    .hero img {
+      display: none; /* show after video ends */
+    }
+
+    /* Mobile only */
+    @media (min-width: 768px) {
+      .mobile-hero {
+        display: none;
+      }
+    }
+
+    /* Desktop only */
+    @media (max-width: 767px) {
+      .desktop-hero {
+        display: none;
+      }
     }
   </style>
-<section class="mobile-hero">
-    <video id="heroVideo" autoplay muted playsinline preload="auto">
+  <!-- Mobile Hero -->
+  <section class="hero mobile-hero">
+    <video id="mobileVideo" muted playsinline preload="auto">
       <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756271019/lv_0_20250827105859_juotgo.mp4" type="video/mp4">
     </video>
-    <img id="heroThumbnail" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756271018/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_110112_0000_equyur.png" alt="Thumbnail">
+    <img id="mobileThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756271018/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_110112_0000_equyur.png" alt="Mobile Thumbnail">
   </section>
 
+  <!-- Desktop Hero -->
+  <section class="hero desktop-hero">
+    <video id="desktopVideo" muted playsinline preload="auto">
+      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756273035/Hi_I_m_20250827_113452_0003_s6pwjl.mp4" type="video/mp4">
+    </video>
+    <img id="desktopThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756273034/Hi_I_m_20250827_113617_0000_vp8yc0.png" alt="Desktop Thumbnail">
+  </section>
   <script>
-    const video = document.getElementById("heroVideo");
-    const thumbnail = document.getElementById("heroThumbnail");
+    function setupHero(videoId, thumbId) {
+      const video = document.getElementById(videoId);
+      const thumbnail = document.getElementById(thumbId);
 
-    // When video ends, hide video and show thumbnail
-    video.addEventListener("ended", () => {
-      video.style.display = "none";
-      thumbnail.style.display = "block";
-    });
+      // Delay start by 4.8s
+      setTimeout(() => {
+        video.play().catch(() => {});
+      }, 4800);
 
-    // Extra safeguard: prevent context menu (right click save)
+      // Swap to thumbnail when finished
+      video.addEventListener("ended", () => {
+        video.style.display = "none";
+        thumbnail.style.display = "block";
+      });
+    }
+
+    setupHero("mobileVideo", "mobileThumb");
+    setupHero("desktopVideo", "desktopThumb");
+
+    // Disable right-click save (basic protection)
     document.addEventListener("contextmenu", e => e.preventDefault());
   </script>
+
 <script>
   // Wait 5 seconds before hiding preloader
   window.addEventListener('load', () => {
