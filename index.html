@@ -336,6 +336,57 @@ body.loaded .shab-m-preloader {
       </div>
     </nav>
   </div>
+  
+<style>
+    /* Hide hero on tablet/desktop */
+    @media (min-width: 768px) {
+      .mobile-hero {
+        display: none;
+      }
+    }
+
+    .mobile-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: black;
+    }
+
+    .mobile-hero video,
+    .mobile-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none; /* disables right-click interactions */
+    }
+
+    .mobile-hero img {
+      display: none; /* hidden until video ends */
+    }
+  </style>
+<section class="mobile-hero">
+    <video id="heroVideo" autoplay muted playsinline preload="auto">
+      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756271019/lv_0_20250827105859_juotgo.mp4" type="video/mp4">
+    </video>
+    <img id="heroThumbnail" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756271018/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_110112_0000_equyur.png" alt="Thumbnail">
+  </section>
+
+  <script>
+    const video = document.getElementById("heroVideo");
+    const thumbnail = document.getElementById("heroThumbnail");
+
+    // When video ends, hide video and show thumbnail
+    video.addEventListener("ended", () => {
+      video.style.display = "none";
+      thumbnail.style.display = "block";
+    });
+
+    // Extra safeguard: prevent context menu (right click save)
+    document.addEventListener("contextmenu", e => e.preventDefault());
+  </script>
 <script>
   // Wait 5 seconds before hiding preloader
   window.addEventListener('load', () => {
