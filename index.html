@@ -324,16 +324,14 @@ body.loaded .shab-m-preloader {
   </div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-/* General */
 :root {
   --yellow: #ff0;
   --white: #fff;
+  --section-margin: 3rem; /* ← You can increase or decrease this value later */
 }
-
-body {
-  font-family: 'Montserrat', sans-serif;
-  background: #000;
-  color: var(--white);
+.container {
+  margin-left: var(--section-margin);
+  margin-right: var(--section-margin);
 }
 
 /* Section Title */
@@ -355,7 +353,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   color: var(--white);
   text-align: left;
-  margin: 2rem 0 3rem 0; /* increased top and bottom margin */
+  margin: 1rem 0 2rem 0;
 }
 
 /* Desktop layout */
@@ -378,7 +376,7 @@ body {
 }
 
 .img-desc {
-  margin-top: 1.5rem; /* slightly larger spacing */
+  margin-top: 1rem;
 }
 
 .right-box {
@@ -391,7 +389,7 @@ body {
 
 /* FAQ */
 .faq-item {
-  margin-bottom: 2rem; /* increased spacing between FAQ items */
+  margin-bottom: 1rem;
   border-bottom: 1px solid #444;
 }
 
@@ -401,8 +399,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0; /* increased padding */
-  color: var(--white); /* ensure text is white */
+  padding: 0.5rem 0;
 }
 
 .faq-question:hover {
@@ -412,8 +409,7 @@ body {
 .faq-answer {
   font-family: 'Montserrat', sans-serif;
   display: none;
-  padding: 1rem 0; /* increased padding */
-  color: var(--white); /* ensure text is white */
+  padding: 0.5rem 0;
 }
 
 .faq-icon {
