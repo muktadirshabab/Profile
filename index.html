@@ -324,14 +324,20 @@ body.loaded .shab-m-preloader {
   </div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* General */
+/* General */
 :root {
   --yellow: #ff0;
   --white: #fff;
 }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #000;
+  color: var(--white);
+}
+
 /* Section Title */
 .section-title {
-  margin: 20px;
   font-family: 'Oswald', sans-serif;
   font-weight: bold;
   font-size: 3.8rem;
@@ -349,7 +355,7 @@ body.loaded .shab-m-preloader {
   font-family: 'Montserrat', sans-serif;
   color: var(--white);
   text-align: left;
-  margin: 1rem 0 2rem 0;
+  margin: 2rem 0 3rem 0; /* increased top and bottom margin */
 }
 
 /* Desktop layout */
@@ -372,7 +378,7 @@ body.loaded .shab-m-preloader {
 }
 
 .img-desc {
-  margin-top: 1rem;
+  margin-top: 1.5rem; /* slightly larger spacing */
 }
 
 .right-box {
@@ -385,18 +391,18 @@ body.loaded .shab-m-preloader {
 
 /* FAQ */
 .faq-item {
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #808000;
+  margin-bottom: 2rem; /* increased spacing between FAQ items */
+  border-bottom: 1px solid #444;
 }
 
 .faq-question {
   font-family: 'Oswald', sans-serif;
-  color: white;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
+  padding: 1rem 0; /* increased padding */
+  color: var(--white); /* ensure text is white */
 }
 
 .faq-question:hover {
@@ -404,10 +410,10 @@ body.loaded .shab-m-preloader {
 }
 
 .faq-answer {
-  color : white;
   font-family: 'Montserrat', sans-serif;
   display: none;
-  padding: 0.5rem 0;
+  padding: 1rem 0; /* increased padding */
+  color: var(--white); /* ensure text is white */
 }
 
 .faq-icon {
@@ -424,7 +430,6 @@ body.loaded .shab-m-preloader {
     flex-direction: column;
   }
   .section-title {
-    margin: 20px;
     text-align: left;
   }
   .section-desc {
