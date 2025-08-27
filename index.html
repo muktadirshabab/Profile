@@ -322,14 +322,11 @@ body.loaded .shab-m-preloader {
       </div>
     </nav>
   </div>
-
-  <!-- Font Awesome for social icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* Shared hero styling */
     .hero {
-      position: relative;
       z-index: -5;
+      position: relative;
       width: 100%;
       height: 100vh;
       overflow: hidden;
@@ -338,7 +335,6 @@ body.loaded .shab-m-preloader {
       align-items: center;
       justify-content: center;
     }
-
     .hero video,
     .hero img {
       position: absolute;
@@ -348,12 +344,7 @@ body.loaded .shab-m-preloader {
       object-fit: cover;
       pointer-events: none;
     }
-
-    .hero img {
-      display: none; /* show after video ends */
-    }
-
-    /* Social icons bar */
+    .hero img { display: none; }
     .social {
       position: absolute;
       bottom: 20px;
@@ -363,15 +354,11 @@ body.loaded .shab-m-preloader {
       gap: 18px;
       z-index: 5;
     }
-    .social a {
-      color: #fff;
-      font-size: 1.3rem;
-      transition: color 0.3s ease;
-    }
-    .social a:hover {
-      color: #ff0;
-    }
-    /* Visibility rules */
+    .social a { color: #fff; font-size: 1.3rem; transition: color 0.3s ease; }
+    .social a:hover { color: #ff0; }
+
+    .mobile-hero video { margin: 20px; width: calc(100% - 40px); height: calc(100% - 40px); object-fit: cover; }
+
     .mobile-hero { display: block; }
     .tablet-hero, .desktop-hero { display: none; }
 
@@ -379,7 +366,6 @@ body.loaded .shab-m-preloader {
       .mobile-hero, .desktop-hero { display: none; }
       .tablet-hero { display: block; }
     }
-
     @media (min-width: 1025px) {
       .mobile-hero, .tablet-hero { display: none; }
       .desktop-hero { display: block; }
@@ -387,10 +373,10 @@ body.loaded .shab-m-preloader {
   </style>
   <!-- Mobile Hero -->
   <section class="hero mobile-hero">
-    <video id="mobileVideo" muted playsinline preload="auto">
-      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756271019/lv_0_20250827105859_juotgo.mp4" type="video/mp4">
+    <video id="mobileVideo" muted playsinline preload="auto" playbackRate="0.9">
+      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756277985/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_122851_0001_bat2ov.mp4" type="video/mp4">
     </video>
-    <img id="mobileThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756271018/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_110112_0000_equyur.png" alt="Mobile Thumbnail">
+    <img id="mobileThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756277976/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_122926_0000_gekmdn.png" alt="Mobile Thumbnail">
     <div class="social">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
       <a href="#"><i class="fab fa-instagram"></i></a>
@@ -402,10 +388,10 @@ body.loaded .shab-m-preloader {
 
   <!-- Tablet Hero -->
   <section class="hero tablet-hero">
-    <video id="tabletVideo" muted playsinline preload="auto">
-      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756274000/tablet_demo.mp4" type="video/mp4">
+    <video id="tabletVideo" muted playsinline preload="auto" playbackRate="0.9">
+      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756277982/My_identity_is-__20250827_125738_0005_sun0wd.mp4" type="video/mp4">
     </video>
-    <img id="tabletThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756274000/tablet_thumb.png" alt="Tablet Thumbnail">
+    <img id="tabletThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756277975/My_identity_is-__20250827_125759_0000_g39fgw.png" alt="Tablet Thumbnail">
     <div class="social">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
       <a href="#"><i class="fab fa-instagram"></i></a>
@@ -417,10 +403,10 @@ body.loaded .shab-m-preloader {
 
   <!-- Desktop Hero -->
   <section class="hero desktop-hero">
-    <video id="desktopVideo" muted playsinline preload="auto">
-      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756273035/Hi_I_m_20250827_113452_0003_s6pwjl.mp4" type="video/mp4">
+    <video id="desktopVideo" muted playsinline preload="auto" playbackRate="0.9">
+      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756277984/Hi_I_m_20250827_123436_0003_hejivo.mp4" type="video/mp4">
     </video>
-    <img id="desktopThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756273034/Hi_I_m_20250827_113617_0000_vp8yc0.png" alt="Desktop Thumbnail">
+    <img id="desktopThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756277976/Hi_I_m_20250827_123457_0000_wqpptg.png" alt="Desktop Thumbnail">
     <div class="social">
       <a href="#"><i class="fab fa-facebook-f"></i></a>
       <a href="#"><i class="fab fa-instagram"></i></a>
@@ -434,13 +420,12 @@ body.loaded .shab-m-preloader {
     function setupHero(videoId, thumbId) {
       const video = document.getElementById(videoId);
       const thumbnail = document.getElementById(thumbId);
+      video.playbackRate = 0.9;
 
-      // Delay start by 4.8s
       setTimeout(() => {
         video.play().catch(() => {});
-      }, 4300);
+      }, 4800);
 
-      // Swap to thumbnail when finished
       video.addEventListener("ended", () => {
         video.style.display = "none";
         thumbnail.style.display = "block";
@@ -451,7 +436,6 @@ body.loaded .shab-m-preloader {
     setupHero("tabletVideo", "tabletThumb");
     setupHero("desktopVideo", "desktopThumb");
 
-    // Disable right-click save (basic block)
     document.addEventListener("contextmenu", e => e.preventDefault());
   </script>
 <script>
