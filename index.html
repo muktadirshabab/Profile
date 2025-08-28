@@ -436,115 +436,163 @@ body.loaded .shab-m-preloader {
   }
 }
 
-    .hero {
-      z-index: -5;
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  </style>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #fff200;
+      --black: #000000;
+      --white: #ffffff;
+      --olive: #808000;
+      --red: #a62c2b;
     }
-    .hero video,
-    .hero img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
+/* Hide by default */
+    .mobile-hero-poster {
+      display: none;
     }
-    .hero img { display: none; }
-    .social {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 18px;
-      z-index: 5;
-    }
-  .social a {
-  color: #000;
-  font-size: 3rem; /* default for tablet/desktop */
-  transition: color 0.3s ease;
-}
 
-.social a:hover {
-  color: #808000;
-}
+    @media (max-width: 768px) {
+      .mobile-hero-poster {
+        display: block;
+        width: 100%;
+        max-width: 600px;
+        overflow: hidden;
+        position: relative;
+      }
 
-/* Mobile version */
-@media screen and (max-width: 768px) {
-  .social {
-      bottom: 50px;
-      left: 50%;
-    }
-  .social a {
-    font-size: 2rem;
-  }
-}
+      .mobile-hero-poster::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: var(--yellow);
+        z-index: -2;
+      }
 
-    .mobile-hero video { margin: 20px; width: 100%; height: 100%; object-fit: cover; }
+      .mobile-hero-poster img.person {
+        position: absolute;
+        top: -20px;
+        right: -5px;
+        width: 60%;
+        z-index: 10;
+      }
 
-    .mobile-hero { display: block; }
-    .tablet-hero, .desktop-hero { display: none; }
+      .text-block {
+        position: relative;
+        padding: 20px;
+        z-index: 2;
+      }
 
-    @media (min-width: 768px) and (max-width: 1024px) {
-      .mobile-hero, .desktop-hero { display: none; }
-      .tablet-hero { display: block; }
-    }
-    @media (min-width: 1025px) {
-      .mobile-hero, .tablet-hero { display: none; }
-      .desktop-hero { display: block; }
+      .text-block h1 {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .text-block h1 span {
+        display: inline-block;
+        opacity: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid transparent;
+      }
+
+      /* --------------------
+         TYPEWRITER + FADE-UP ANIMATION
+         -------------------- */
+      @keyframes typewriter {
+        0% { width: 0; opacity: 1; }
+        100% { width: 100%; opacity: 1; }
+      }
+
+      @keyframes fadeUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Word styles with individual animation delay */
+      .word-im {
+        font-size: 12rem;
+        color: var(--yellow);
+        line-height: 0.9;
+        animation: typewriter 1s steps(5) forwards, fadeUp 1s ease forwards;
+        animation-delay: 0s, 0s;
+      }
+
+      .word-muktadir {
+        font-size: 3.8rem;
+        color: var(--white);
+        line-height: 0.85;
+        animation: typewriter 1.2s steps(9) forwards, fadeUp 1s ease forwards;
+        animation-delay: 1s, 1s;
+      }
+
+      .word-shabab {
+        font-size: 5rem;
+        color: var(--yellow);
+        line-height: 0.9;
+        animation: typewriter 1.5s steps(6) forwards, fadeUp 1s ease forwards;
+        animation-delay: 2.3s, 2.3s;
+      }
+
+      .word-artist {
+        font-size: 5.9rem;
+        color: var(--black);
+        line-height: 0.8;
+        animation: typewriter 1.3s steps(6) forwards, fadeUp 1s ease forwards;
+        animation-delay: 3.9s, 3.9s;
+      }
+
+      .word-writer {
+        font-size: 6.2rem;
+        color: var(--olive);
+        line-height: 1;
+        animation: typewriter 1.5s steps(7) forwards, fadeUp 1s ease forwards;
+        animation-delay: 5.3s, 5.3s;
+        position: relative;
+        z-index: 20; /* above profile image */
+      }
+
+      .word-actor {
+        font-size: 7.2rem;
+        color: var(--red);
+        line-height: 1;
+        animation: typewriter 1.8s steps(6) forwards, fadeUp 1s ease forwards;
+        animation-delay: 6.8s, 6.8s;
+        position: relative;
+        z-index: 20; /* above profile image */
+      }
+
+      /* Ensure final state persists */
+      h1 span {
+        animation-fill-mode: forwards;
+      }
+
+      /* Responsive tweaks */
+      @media (max-width: 480px) {
+        .word-im { font-size: 12rem; }
+        .word-muktadir { font-size: 3.8rem; }
+        .word-shabab { font-size: 5rem; }
+        .word-artist { font-size: 5.9rem; }
+        .word-writer { font-size: 6.2rem; }
+        .word-actor { font-size: 7.2rem; }
+      }
     }
   </style>
-  <!-- Mobile Hero -->
-  <section class="hero mobile-hero">
-    <video id="mobileVideo" muted playsinline preload="auto" playbackRate="0.9">
-      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756277985/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_122851_0001_bat2ov.mp4" type="video/mp4">
-    </video>
-    <img id="mobileThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756277976/Beige_Aesthetic_Collage_Motivational_Quote_Phone_Wallpaper_20250827_122926_0000_gekmdn.png" alt="Mobile Thumbnail">
-    <div class="social">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-dribbble"></i></a>
-      <a href="#"><i class="fab fa-behance"></i></a>
-      <a href="#"><i class="fab fa-medium-m"></i></a>
+<div class="mobile-hero-poster">
+    <div class="text-block">
+      <h1>
+        <span class="word-im">I'M</span>
+        <span class="word-muktadir">MUKTADIR</span>
+        <span class="word-shabab">SHABAB</span>
+        <span class="word-artist">ARTIST</span>
+        <span class="word-writer">Actor And</span>
+        <span class="word-actor">Writer</span>
+      </h1>
     </div>
-  </section>
-
-  <!-- Tablet Hero -->
-  <section class="hero tablet-hero">
-    <video id="tabletVideo" muted playsinline preload="auto" playbackRate="0.9">
-      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756278920/My_identity_is-__20250827_131402_0001_cujwzu.mp4" type="video/mp4">
-    </video>
-    <img id="tabletThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756278915/My_identity_is-__20250827_131432_0000_xgjnmr.png" alt="Tablet Thumbnail">
-    <div class="social">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-dribbble"></i></a>
-      <a href="#"><i class="fab fa-behance"></i></a>
-      <a href="#"><i class="fab fa-medium-m"></i></a>
-    </div>
-  </section>
-
-  <!-- Desktop Hero -->
-  <section class="hero desktop-hero">
-    <video id="desktopVideo" muted playsinline preload="auto" playbackRate="0.9">
-      <source src="https://res.cloudinary.com/dxiwnqpja/video/upload/v1756277984/Hi_I_m_20250827_123436_0003_hejivo.mp4" type="video/mp4">
-    </video>
-    <img id="desktopThumb" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756277976/Hi_I_m_20250827_123457_0000_wqpptg.png" alt="Desktop Thumbnail">
-    <div class="social">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-dribbble"></i></a>
-      <a href="#"><i class="fab fa-behance"></i></a>
-      <a href="#"><i class="fab fa-medium-m"></i></a>
-    </div>
-  </section>
+    <img class="person" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756152232/IMG-20250506-WA0014_edit_1110666578519508_xtfpa7.png" alt="Person">
+</div>
 	   <style>
   
 *,::before,::after{
