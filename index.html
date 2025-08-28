@@ -349,14 +349,15 @@ body.loaded .shab-m-preloader {
     width: 100%;
     height: 50%;
     background: linear-gradient(
-        to top,
-        #fff200 0%,         /* solid yellow start */
-        #fff200 60%,        /* solid yellow till 60% */
-        rgba(255, 242, 0, 0.7) 55%,  /* start fading */
-        rgba(255, 242, 0, 0.3) 65%,  /* mid fade */
-        rgba(255, 242, 0, 0) 85%,    /* almost transparent */
-        rgba(255, 242, 0, 0) 100%    /* fully transparent bottom */
-    );
+    to top,
+    #fff200 0%,          /* solid yellow start */
+    #fff200 60%,         /* solid yellow till 60% */
+    #e6db00 65%,         /* slightly darker yellow for smooth transition */
+    #b3a600 75%,         /* mid fade into darker tone */
+    #4d4000 90%,         /* near black */
+    #000000 100%         /* fully black at top */
+);
+
 	z-index: -2;
 }
 
