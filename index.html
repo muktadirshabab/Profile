@@ -48,7 +48,7 @@
 body {
   margin: 0;
   /* Gradient: top 20% yellow, remaining 80% black */
-  background: linear-gradient(to bottom, #ff0 20%, #000 20%);
+  background: linear-gradient(to bottom, #fff200 20%, #000 20%);
 }
 
 
@@ -440,169 +440,181 @@ body.loaded .shab-m-preloader {
 
   </style>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --yellow: #fff200;
-      --black: #000000;
-      --white: #ffffff;
-      --olive: #808000;
-      --red: #a62c2b;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --yellow: #fff200;
+  --black: #000000;
+  --white: #ffffff;
+  --olive: #808000;
+  --red: #a62c2b;
+}
+
 /* Hide by default */
-    .mobile-hero-poster {
-      display: none;
-    }
+.mobile-hero-poster {
+  display: none;
+}
 
-    @media (max-width: 768px) {
-      .mobile-hero-poster {
-        display: block;
-        width: 100%;
-        max-width: 600px;
-        overflow: hidden;
-        position: relative;
-      }
+@media (max-width: 768px) {
+  .mobile-hero-poster {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+  }
 
-      .mobile-hero-poster::before {
-        content: "";
-        position: absolute;
-        top: 0%;
-        left: 0;
-        width: 100%;
-        height: 50%;
-        background: var(--yellow);
-        z-index: -2;
-      }
+  .mobile-hero-poster::before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--yellow);
+    z-index: -2;
+  }
 
-      .mobile-hero-poster img.person {
+  .mobile-hero-poster img.person {
     position: absolute;
     top: -23px;
     right: -5px;
     width: 60%;
     z-index: 10;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4); /* adds shadow */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-block {
+    position: relative;
+    padding: 20px;
+    z-index: 2;
+  }
+
+  .text-block h1 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .text-block h1 span {
+    display: inline-block;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid transparent;
+    animation-fill-mode: forwards;
+    animation-play-state: paused; /* pause initially */
+  }
+
+  /* --------------------
+     TYPEWRITER + FADE-UP ANIMATION
+     -------------------- */
+  @keyframes typewriter {
+    0% { width: 0; opacity: 1; }
+    100% { width: 100%; opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Word styles with individual animation delay */
+  .word-im {
+    font-family: 'Anton', sans-serif;
+    font-size: 12rem;
+    color: var(--olive);
+    line-height: 0.9;
+    animation: typewriter 1s steps(5) forwards, fadeUp 1s ease forwards;
+    animation-delay: 0s, 0s;
+  }
+
+  .word-muktadir {
+    font-family: 'Anton', sans-serif;
+    font-size: 3.8rem;
+    color: var(--black);
+    line-height: 0.85;
+    animation: typewriter 1.2s steps(9) forwards, fadeUp 1s ease forwards;
+    animation-delay: 1s, 1s;
+  }
+
+  .word-shabab {
+    font-family: 'Anton', sans-serif;
+    font-size: 5rem;
+    color: var(--black);
+    line-height: 0.9;
+    animation: typewriter 1.5s steps(6) forwards, fadeUp 1s ease forwards;
+    animation-delay: 2.3s, 2.3s;
+  }
+
+  .word-artist {
+    font-family: 'Anton', sans-serif;
+    font-size: 5.9rem;
+    color: var(--yellow);
+    line-height: 0.8;
+    animation: typewriter 1.3s steps(6) forwards, fadeUp 1s ease forwards;
+    animation-delay: 3.9s, 3.9s;
+  }
+
+  .word-writer {
+    font-family: 'Anton', sans-serif;
+    font-size: 6.2rem;
+    color: var(--white);
+    line-height: 1;
+    animation: typewriter 1.5s steps(7) forwards, fadeUp 1s ease forwards;
+    animation-delay: 5.3s, 5.3s;
+    position: relative;
+    z-index: 20;
+  }
+
+  .word-actor {
+    font-family: 'Anton', sans-serif;
+    font-size: 7.2rem;
+    color: var(--white);
+    line-height: 1;
+    animation: typewriter 1.8s steps(6) forwards, fadeUp 1s ease forwards;
+    animation-delay: 6.8s, 6.8s;
+    position: relative;
+    z-index: 20;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 480px) {
+    .word-im { font-size: 12rem; }
+    .word-muktadir { font-size: 3.8rem; }
+    .word-shabab { font-size: 5rem; }
+    .word-artist { font-size: 5.9rem; }
+    .word-writer { font-size: 6.2rem; }
+    .word-actor { font-size: 7.2rem; }
+  }
 }
+</style>
 
-
-      .text-block {
-        position: relative;
-        padding: 20px;
-        z-index: 2;
-      }
-
-      .text-block h1 {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .text-block h1 span {
-        display: inline-block;
-        opacity: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        border-right: 2px solid transparent;
-      }
-
-      /* --------------------
-         TYPEWRITER + FADE-UP ANIMATION
-         -------------------- */
-      @keyframes typewriter {
-        0% { width: 0; opacity: 1; }
-        100% { width: 100%; opacity: 1; }
-      }
-
-      @keyframes fadeUp {
-        0% { opacity: 0; transform: translateY(20px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-
-      /* Word styles with individual animation delay */
-      .word-im {
-		font-family: 'Anton', sans-serif;
-        font-size: 12rem;
-        color: var(--olive);
-        line-height: 0.9;
-        animation: typewriter 1s steps(5) forwards, fadeUp 1s ease forwards;
-        animation-delay: 0s, 0s;
-      }
-
-      .word-muktadir {
-		font-family: 'Anton', sans-serif;
-        font-size: 3.8rem;
-        color: var(--black);
-        line-height: 0.85;
-        animation: typewriter 1.2s steps(9) forwards, fadeUp 1s ease forwards;
-        animation-delay: 1s, 1s;
-      }
-
-      .word-shabab {
-        font-size: 5rem;
-		font-family: 'Anton', sans-serif;
-        color: var(--black);
-        line-height: 0.9;
-        animation: typewriter 1.5s steps(6) forwards, fadeUp 1s ease forwards;
-        animation-delay: 2.3s, 2.3s;
-      }
-
-      .word-artist {
-		font-family: 'Anton', sans-serif;
-        font-size: 5.9rem;
-        color: var(--yellow);
-        line-height: 0.8;
-        animation: typewriter 1.3s steps(6) forwards, fadeUp 1s ease forwards;
-        animation-delay: 3.9s, 3.9s;
-      }
-
-      .word-writer {
-		font-family: 'Anton', sans-serif;
-        font-size: 6.2rem;
-        color: var(--white);
-        line-height: 1;
-        animation: typewriter 1.5s steps(7) forwards, fadeUp 1s ease forwards;
-        animation-delay: 5.3s, 5.3s;
-        position: relative;
-        z-index: 20; /* above profile image */
-      }
-
-      .word-actor {
-		font-family: 'Anton', sans-serif;
-        font-size: 7.2rem;
-        color: var(--white);
-        line-height: 1;
-        animation: typewriter 1.8s steps(6) forwards, fadeUp 1s ease forwards;
-        animation-delay: 6.8s, 6.8s;
-        position: relative;
-        z-index: 20; /* above profile image */
-      }
-
-      /* Ensure final state persists */
-      h1 span {
-        animation-fill-mode: forwards;
-      }
-
-      /* Responsive tweaks */
-      @media (max-width: 480px) {
-        .word-im { font-size: 12rem; }
-        .word-muktadir { font-size: 3.8rem; }
-        .word-shabab { font-size: 5rem; }
-        .word-artist { font-size: 5.9rem; }
-        .word-writer { font-size: 6.2rem; }
-        .word-actor { font-size: 7.2rem; }
-      }
-    }
-  </style>
 <div class="mobile-hero-poster">
-    <div class="text-block">
-      <h1>
-        <span class="word-im">I'M</span>
-        <span class="word-muktadir">MUKTADIR</span>
-        <span class="word-shabab">SHABAB</span>
-        <span class="word-artist">ARTIST</span>
-        <span class="word-writer">Actor And</span>
-        <span class="word-actor">Writer</span>
-      </h1>
-    </div>
-    <img class="person" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756152232/IMG-20250506-WA0014_edit_1110666578519508_xtfpa7.png" alt="Person">
+  <div class="text-block">
+    <h1>
+      <span class="word-im">I'M</span>
+      <span class="word-muktadir">MUKTADIR</span>
+      <span class="word-shabab">SHABAB</span>
+      <span class="word-artist">ARTIST</span>
+      <span class="word-writer">Actor And</span>
+      <span class="word-actor">Writer</span>
+    </h1>
+  </div>
+  <img class="person" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756152232/IMG-20250506-WA0014_edit_1110666578519508_xtfpa7.png" alt="Person">
 </div>
+
+<script>
+  // Start animations after 4 seconds
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.mobile-hero-poster .text-block span').forEach(span => {
+        span.style.animationPlayState = 'running';
+      });
+    }, 4000);
+  });
+</script>
+
 	   <style>
   
 *,::before,::after{
@@ -930,36 +942,11 @@ input:checked +.about-card > .about-img{
           <div class="faq-question">Blogger and WordPress Management <span class="faq-icon">^</span></div>
           <div class="faq-answer">Experience in managing Blogger and WordPress websites.</div>
         </div>
-
       </div> <!-- right-box -->
-
     </div> <!-- desktop-layout -->
-
   </div>
-</section>
-                        
+</section>              
   <script>
-    function setupHero(videoId, thumbId) {
-      const video = document.getElementById(videoId);
-      const thumbnail = document.getElementById(thumbId);
-      video.playbackRate = 0.9;
-
-      setTimeout(() => {
-        video.play().catch(() => {});
-      }, 4800);
-
-      video.addEventListener("ended", () => {
-        video.style.display = "none";
-        thumbnail.style.display = "block";
-      });
-    }
-
-    setupHero("mobileVideo", "mobileThumb");
-    setupHero("tabletVideo", "tabletThumb");
-    setupHero("desktopVideo", "desktopThumb");
-
-    document.addEventListener("contextmenu", e => e.preventDefault());
-  
   const faqItems = document.querySelectorAll('.faq-item');
 
 faqItems.forEach(item => {
