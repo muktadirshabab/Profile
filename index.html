@@ -34,27 +34,21 @@
     }
 
     html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', Arial, sans-serif;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    position: relative;
-  }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
 
-  body {
-    margin: 0;
-    background: linear-gradient(to bottom, #fff200 20%, #000 20%);
-    transition: background 0.3s ease;
-  }
-
-  /* Just to enable scrolling */
-  .content {
-    height: 200vh;
-  }
-
-
+body {
+  /* Initial top 20% yellow, rest black */
+  background: linear-gradient(to bottom, #fff200 20%, #000 20%);
+  background-attachment: fixed; /* Make background fixed so scroll reveals black */
+  background-size: 100% 100vh;
+  margin: 0;
+}
 body.loaded .shab-m-preloader {
   opacity: 0;
   pointer-events: none;
@@ -294,7 +288,6 @@ body.loaded .shab-m-preloader {
   </style>
 </head>
 <body>
-	<div class="content"></div>
   <div id="preloader">
   <svg viewBox="0 0 100 100">
     <path d="M 10 90 L 10 10 L 50 50 L 90 10 L 90 90" />
@@ -981,17 +974,7 @@ faqItems.forEach(item => {
 </script>
 
   <script>
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const yellowHeight = window.innerHeight * 0.2; // 20% of viewport
-    if(scrollY > yellowHeight) {
-      document.body.style.background = '#000'; // full black
-    } else {
-      document.body.style.background = `linear-gradient(to bottom, #fff200 20%, #000 20%)`;
-    }
-  });
-	  
-    const btn = document.getElementById('navToggle');
+const btn = document.getElementById('navToggle');
     const menu = document.getElementById('menu');
     btn.addEventListener('click', () => {
       const isOpen = menu.classList.toggle('open');
