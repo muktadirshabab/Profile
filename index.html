@@ -374,11 +374,12 @@ body.loaded .shab-m-preloader {
     to top,
     #fff200 0%,          /* solid yellow start */
     #fff200 60%,         /* solid yellow till 60% */
-    #e6db00 65%,         /* slightly darker yellow for smooth transition */
-    #b3a600 75%,         /* mid fade into darker tone */
-    #4d4000 90%,         /* near black */
-    #000000 100%         /* fully black at top */
+    rgba(255, 242, 0, 0.8) 65%,   /* start fading */
+    rgba(255, 242, 0, 0.5) 75%,   /* mid fade */
+    rgba(255, 242, 0, 0.2) 90%,   /* almost transparent */
+    rgba(255, 242, 0, 0) 100%     /* fully transparent top */
 );
+
 
 	z-index: -2;
 }
