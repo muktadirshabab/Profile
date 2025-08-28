@@ -34,21 +34,32 @@
     }
 
     html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Montserrat', Arial, sans-serif;
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
+    height: 200vh; /* Enough to scroll */
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
 
-body {
-  /* Initial top 20% yellow, rest black */
-  background: linear-gradient(to bottom, #fff200 20%, #000 20%);
-  background-attachment: fixed; /* Make background fixed so scroll reveals black */
-  background-size: 100% 100vh;
-  margin: 0;
-}
+  body {
+    background: #fff200; /* Initial yellow */
+    scroll-timeline-name: scroll-bg;
+    scroll-timeline-axis: block;
+    animation: bg-color-change 1s linear forwards;
+    animation-timeline: scroll-bg;
+  }
+
+  @keyframes bg-color-change {
+    0% { background: #fff200; }
+    5% { background: #000; } /* Turn black after 5% scroll */
+    100% { background: #000; }
+  }
+
+  @scroll-timeline scroll-bg {
+    source: auto;
+    orientation: block;
+  }
 body.loaded .shab-m-preloader {
   opacity: 0;
   pointer-events: none;
