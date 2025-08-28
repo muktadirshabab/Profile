@@ -529,14 +529,20 @@ body.loaded .shab-m-preloader {
   }
 
   /* Word styles with individual animation delay */
-  .word-im {
-    font-family: 'Anton', sans-serif;
-    font-size: 12rem;
-    color: var(--olive);
-    line-height: 0.9;
-    animation: typewriter 1s steps(5) forwards, fadeUp 1s ease forwards;
-    animation-delay: 0s, 0s;
-  }
+.word-im {
+  font-family: 'Anton', sans-serif;
+  font-size: 12rem;
+  line-height: 0.9;
+  /* Text gradient */
+  background: linear-gradient(to bottom, #fff200, #808000, #556b2f); /* top light yellow to bottom dark olive */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Animations */
+  animation: typewriter 1s steps(5) forwards, fadeUp 1s ease forwards;
+  animation-delay: 0s, 0s;
+}
+
 
   .word-muktadir {
     font-family: 'Anton', sans-serif;
