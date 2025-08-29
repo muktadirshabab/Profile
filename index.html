@@ -681,19 +681,7 @@ input:checked +.about-card > .about-img{
   </div>
   <img class="person" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756152232/IMG-20250506-WA0014_edit_1110666578519508_xtfpa7.png" alt="Person">
 </div>
-<script>
-  // Start animations after 4 seconds
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.querySelectorAll('.mobile-hero-poster .text-block span').forEach(span => {
-        span.style.animationPlayState = 'running';
-      });
-    }, 4000);
-  });
-</script>
 <br>
-	<br>
-	<br>
 	<br>
 	<br>
 	<br>
@@ -706,8 +694,8 @@ input:checked +.about-card > .about-img{
     <img class="about-img" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050780/PXL_20241018_105609385.PORTRAIT_edit_172874669851919_bwur8y.jpg">
    <div class="about-card-data">
       <span class="card-num">1/4</span>
-      <h2>Alejandro Escamilla</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <h2>Made with Grit & Vision</h2>
+      <p>I don’t just create—I shape ideas into experiences. Whether it’s art, design, or storytelling, I bring attitude, detail, and heart into every project. My work is where creativity meets courage, and every piece carries a little bit of who I am.</p>
       <footer>
         <label for="radio-4" aria-label="Previous">&#10094;</label>
         <label for="radio-2" aria-label="Next">&#10095;</label>
@@ -720,8 +708,8 @@ input:checked +.about-card > .about-img{
     <img class="about-img" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050788/IMG-20240518-WA0015_edit_162123510803816_ejhbhr.jpg">
     <div class="about-card-data">
       <span class="card-num">2/4</span>
-      <h2>Shyamanta Baruah</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <h2>Leading with Purpose, Not Just Position</h2>
+      <p>I believe leadership is more than giving directions—it’s about inspiring people to move together toward a vision. As a social activist and debater, I’ve learned how to listen, stand firm, and speak for change. Leading a team is where I thrive: guiding with clarity, motivating with energy, and making sure every voice counts. For me, leadership is not just a role, it’s a passion I live every day.</p>
       <footer>
         <label for="radio-1" aria-label="Previous">&#10094;</label>
         <label for="radio-3" aria-label="Next">&#10095;</label>
@@ -734,8 +722,8 @@ input:checked +.about-card > .about-img{
     <img class="about-img" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050792/IMG-20240815-WA0028_edit_161944830798883_q9qyxv.jpg">
     <div class="about-card-data">
       <span class="card-num">3/4</span>
-      <h2>Luke Chesser</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <h2>Art That Speaks Louder Than Words</h2>
+      <p>I don’t just make art—I create stories you can see, feel, and remember. Every stroke, design, and detail is crafted with purpose, blending creativity with skill to leave a lasting impact. My work is bold, expressive, and built to connect with people. Whether you’re looking for fresh visuals, powerful concepts, or unique designs, I bring attitude and artistry that turn ideas into something unforgettable.</p>
       <footer>
         <label for="radio-2" aria-label="Previous">&#10094;</label>
         <label for="radio-4" aria-label="Next">&#10095;</label>
@@ -748,8 +736,8 @@ input:checked +.about-card > .about-img{
     <img class="about-img" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg">
     <div class="about-card-data">
       <span class="card-num">4/4</span>
-      <h2>Ilham Rahmansyah</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maiores accusantium cumque atque? Ex voluptatem quisquam temporibus. Provident rerum quae nemo eligendi fugiat!</p>
+      <h2>Turning Ideas into Impact</h2>
+      <p>I am an artist, writer, actor, director, designer, and digital marketer with a passion for creating work that inspires and connects. My journey across different creative fields has given me the ability to see projects from fresh perspectives and deliver bold, meaningful results. As a social activist and debater, I’ve developed strong leadership, communication, and teamwork skills—guiding people with clarity and purpose. I bring both creativity and strategy to every project, ensuring ideas don’t just stay ideas but become powerful experiences. If you want originality, vision, and impact—I’m ready.</p>
       <footer>
         <label for="radio-3" aria-label="Previous">&#10094;</label>
         <label for="radio-1" aria-label="Next">&#10095;</label>
@@ -777,6 +765,15 @@ const btn = document.getElementById('navToggle');
       btn.classList.toggle('active', isOpen);
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
-  </script>
+  
+  // Start animations after 4 seconds
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.mobile-hero-poster .text-block span').forEach(span => {
+        span.style.animationPlayState = 'running';
+      });
+    }, 3000);
+  });
+</script>
 </body>
 </html>
