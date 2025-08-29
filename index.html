@@ -4,22 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Muktadir Shabab — Hero Section</title>
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
- <!-- Montserrat 300 / 700 -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-
-<!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
   <style>
-
-  :root{
+:root{
       --bg: #000000;
       --text: #ffffff;
       --glass: rgba(255,255,255,0.06);
@@ -33,7 +22,7 @@
       --noise-opacity: .08;
     }
 
-    html, body {
+html, body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -41,17 +30,17 @@
   box-sizing: border-box;
   min-height: 100vh;
   overflow-x: hidden;
-  background: #000;
+  background: #fff;
   position: relative;
   z-index: 0;
 }
 
 /* pure background noise */
 body {
-  background-color: #000; /* main base */
+  background-color: #fff; /* main base white */
   background-image: 
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), /* <<< DARK/LIGHT CONTROL */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), /* <<< LIGHT CONTROL */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' fill='white'/%3E%3C/svg%3E");
   background-size: 200px 200px;
   animation: noiseAnim 1s steps(6) infinite;
 }
@@ -80,7 +69,7 @@ body.loaded .shab-m-preloader {
   justify-content: center;
   gap: 10px;
   padding: 10px 14px;
-  background: black;
+  background: var(--glass);
   border: 1px solid var(--glass-stroke);
   border-radius: var(--nav-radius);
   backdrop-filter: blur(var(--blur));
@@ -101,7 +90,7 @@ body.loaded .shab-m-preloader {
       height: 44px;
       border-radius: 999px;
       padding: 2px;
-      background: #fff200; /* yellow border */
+      background: #000; /* yellow border */
     }
     .logo-ring img{
       width: 100%;
@@ -110,28 +99,31 @@ body.loaded .shab-m-preloader {
       object-fit: cover;
     }
     .status{
+      font-family: 'Montserrat', sans-serif;
       display: flex;
-      color: white;
+      color: black;
       align-items: center;
       gap: 8px;
       font-weight: 300;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
-    .dot{
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--yellow); /* active dot color */
-      position: relative;
-    }
-    .dot::after{
-      content:"";
-      position:absolute;
-      inset:-6px;
-      border-radius:inherit;
-      border:1px solid rgba(255,255,0,.65);
-      animation: ping 1.8s cubic-bezier(.2,.8,.2,1) infinite;
-    }
+    .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #222; /* active dot color, dark */
+  position: relative;
+}
+
+.dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.4); /* soft dark ring */
+  animation: ping 1.8s cubic-bezier(.2,.8,.2,1) infinite;
+}
+
     @keyframes ping{
       0%{ opacity:.8; transform: scale(0.6) }
       100%{ opacity:0; transform: scale(1.6) }
@@ -152,7 +144,7 @@ body.loaded .shab-m-preloader {
     .hamburger .line{
       height: 2px;
       width: 100%;
-      background: #ff0;
+      background: #545435;
       border-radius: 2px;
       position: absolute;
       left: 0;
@@ -175,7 +167,7 @@ body.loaded .shab-m-preloader {
       left: 8px;
       right: 8px;
       top: calc(100% + 10px);
-      background: black;
+      background: white;
       border: 1px solid var(--glass-stroke);
       border-radius: 20px;
       box-shadow: var(--shadow);
@@ -200,9 +192,11 @@ body.loaded .shab-m-preloader {
       gap: 6px;
     }
     .menu a{
+      font-size: 1rem;
       display: block;
+      font-family: 'Montserrat', sans-serif;
       padding: 12px 14px;
-      color: #fff;
+      color: #000;
       text-decoration: none;
       text-align: center;
       font-weight: 300; /* thin by default */
@@ -210,7 +204,7 @@ body.loaded .shab-m-preloader {
       transition: color .18s ease, background-color .18s ease, font-weight .18s ease;
     }
     .menu a:hover{
-      color: var(--hover); /* yellow hover */
+      color: #545435; /* yellow hover */
       background-color: rgba(255,255,255,0.04);
 
     }
@@ -256,7 +250,7 @@ body.loaded .shab-m-preloader {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #1e1e1e; /* match your site’s dark bg */
+  background: #fff; /* match your site’s dark bg */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -268,7 +262,7 @@ body.loaded .shab-m-preloader {
 #preloader svg {
   width: 80px;   /* adjust size as needed */
   height: 80px;
-  stroke: #ffdd57;
+  stroke: #000;
   stroke-width: 4;
   fill: transparent;
   stroke-linecap: round;
@@ -301,54 +295,6 @@ body.loaded .shab-m-preloader {
     stroke-width: 2.5;
   }
 }
-
-  </style>
-</head>
-<body>
-  <div id="preloader">
-  <svg viewBox="0 0 100 100">
-    <path d="M 10 90 L 10 10 L 50 50 L 90 10 L 90 90" />
-  </svg>
-</div>
-
-  <div class="wrap">
-    <nav class="nav">
-      <div class="center">
-        <div class="logo-ring">
-          <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg" alt="Profile logo">
-        </div>
-        <div class="status">
-          <span>Available for work</span>
-          <span class="dot"></span>
-        </div>
-      </div>
-
-      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="menu">
-        <span class="line line1"></span>
-        <span class="line line2"></span>
-      </button>
-
-      <div class="menu" id="menu">
-        <ul>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#paintings">Paintings</a></li>
-          <li><a href="#blogs">Blogs</a></li>
-          <li><a href="#hire">Hire me</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-
-<style>
-:root {
-  --yellow: #fff200;
-  --black: #000000;
-  --white: #ffffff;
-  --olive: #808000;
-  --red: #a62c2b;
-}
-
 /* Hide by default */
 .mobile-hero-poster {
   display: none;
@@ -366,21 +312,18 @@ body.loaded .shab-m-preloader {
 .mobile-hero-poster::before {
     content: "";
     position: absolute;
-    top: 0;
+    top: 0.6%;
     left: 0;
     width: 100%;
     height: 50%;
     background: linear-gradient(
-    to top,
-    #fff200 0%,          /* solid yellow start */
-    #fff200 60%,         /* solid yellow till 60% */
-    rgba(255, 242, 0, 0.8) 65%,   /* start fading */
-    rgba(255, 242, 0, 0.5) 75%,   /* mid fade */
-    rgba(255, 242, 0, 0.2) 90%,   /* almost transparent */
-    rgba(255, 242, 0, 0) 100%     /* fully transparent top */
+  to top,
+  rgba(0, 0, 0, 1) 0%,    /* solid black start */
+  rgba(0, 0, 0, 0.75) 25%, 
+  rgba(0, 0, 0, 0.5) 50%, 
+  rgba(0, 0, 0, 0.25) 75%, 
+  rgba(0, 0, 0, 0) 100%    /* fully transparent top */
 );
-
-
 	z-index: -2;
 }
 
@@ -391,7 +334,6 @@ body.loaded .shab-m-preloader {
     right: -5px;
     width: 60%;
     z-index: 10;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   }
 
   .text-block {
@@ -434,7 +376,14 @@ body.loaded .shab-m-preloader {
   font-size: 12rem;
   line-height: 0.9;
   /* Text gradient */
-  background: linear-gradient(to bottom, #fff200, #808000, #556b2f); /* top light yellow to bottom dark olive */
+  background: linear-gradient(
+  to bottom,
+  #000000 0%,      /* solid black start */
+  #333333 25%,     /* dark grey */
+  #666666 50%,     /* medium grey */
+  #cccccc 75%,     /* light grey */
+  #ffffff 100%     /* solid white top */
+);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -447,7 +396,7 @@ body.loaded .shab-m-preloader {
   .word-muktadir {
     font-family: 'Anton', sans-serif;
     font-size: 3.8rem;
-    color: var(--black);
+    color: #fed083;
     line-height: 0.85;
     animation: typewriter 1.2s steps(9) forwards, fadeUp 1s ease forwards;
     animation-delay: 1s, 1s;
@@ -456,7 +405,7 @@ body.loaded .shab-m-preloader {
   .word-shabab {
     font-family: 'Anton', sans-serif;
     font-size: 5rem;
-    color: var(--black);
+    color: #fff;
     line-height: 0.9;
     animation: typewriter 1.5s steps(6) forwards, fadeUp 1s ease forwards;
     animation-delay: 2.3s, 2.3s;
@@ -465,7 +414,7 @@ body.loaded .shab-m-preloader {
   .word-artist {
     font-family: 'Anton', sans-serif;
     font-size: 5.9rem;
-    color: var(--yellow);
+    color: #000;
     line-height: 0.8;
     animation: typewriter 1.3s steps(6) forwards, fadeUp 1s ease forwards;
     animation-delay: 3.9s, 3.9s;
@@ -474,7 +423,7 @@ body.loaded .shab-m-preloader {
   .word-writer {
     font-family: 'Anton', sans-serif;
     font-size: 6.2rem;
-    color: var(--white);
+    color: #545435;
     line-height: 1;
     animation: typewriter 1.5s steps(7) forwards, fadeUp 1s ease forwards;
     animation-delay: 5.3s, 5.3s;
@@ -485,7 +434,7 @@ body.loaded .shab-m-preloader {
   .word-actor {
     font-family: 'Anton', sans-serif;
     font-size: 7.2rem;
-    color: var(--white);
+    color: #000;
     line-height: 1;
     animation: typewriter 1.8s steps(6) forwards, fadeUp 1s ease forwards;
     animation-delay: 6.8s, 6.8s;
@@ -503,43 +452,8 @@ body.loaded .shab-m-preloader {
     .word-actor { font-size: 7.2rem; }
   }
 }
-</style>
-
-<div class="mobile-hero-poster">
-  <div class="text-block">
-    <h1>
-      <span class="word-im">I'M</span>
-      <span class="word-muktadir">MUKTADIR</span>
-      <span class="word-shabab">SHABAB</span>
-      <span class="word-artist">ARTIST</span>
-      <span class="word-writer">Actor And</span>
-      <span class="word-actor">Writer</span>
-    </h1>
-  </div>
-  <img class="person" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756152232/IMG-20250506-WA0014_edit_1110666578519508_xtfpa7.png" alt="Person">
-</div>
-
-<script>
-  // Start animations after 4 seconds
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.querySelectorAll('.mobile-hero-poster .text-block span').forEach(span => {
-        span.style.animationPlayState = 'running';
-      });
-    }, 4000);
-  });
-</script>
-<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	   <style>
   
-*,::before,::after{
+  *,::before,::after{
   margin: 0;
 }
 
@@ -551,6 +465,7 @@ body.loaded .shab-m-preloader {
 /* general styling */
 html {
 	color-scheme: dark light;
+  color: #000; /* make all text black */
 }
 img{
   max-width: 100%;
@@ -606,7 +521,7 @@ input[type="radio"] {
   aspect-ratio: 1 / 1 ;
   rotate: var(--angle, 0deg);
   border-radius: 10px;
-  border: 3px solid #FFF;
+  border: 3px solid beige; /* beige border */
   overflow: hidden;
   transform-origin: center;
   object-fit: cover;
@@ -655,10 +570,11 @@ input:checked + .about-card{
 .about-card-data > .card-num{
   opacity: var(--data-opacity, 0);
   font-size: .8rem;
-  color: #666;
+  color: #000; /* black */
 }
 .about-card-data > p{
   font-size: 0.9rem;
+  color: #000; /* black */
 }
 .about-card-data > h2,
 .about-card-data > p{
@@ -666,6 +582,7 @@ input:checked + .about-card{
   transition-delay: var(--data-delay,0ms);
   opacity: var(--data-opacity, 0);
   translate: 0 var(--data-y, 20px);
+  color: #000; /* black */
 }
 .about-card-data > footer{
   display: flex;
@@ -691,7 +608,7 @@ input:checked + .about-card{
 
 input:checked:focus-visible + .about-card > .about-card-data > footer label,
 .about-card-data > footer label:hover{
-  --label-clr-txt: #FFF;
+  --label-clr-txt: #000;
   --label-clr-bg: steelblue;
 }
 
@@ -715,8 +632,73 @@ input:checked +.about-card > .about-img{
   }
 }
 
-</style>
+  </style>
+</head>
+<body>
+  <div id="preloader">
+  <svg viewBox="0 0 100 100">
+    <path d="M 10 90 L 10 10 L 50 50 L 90 10 L 90 90" />
+  </svg>
+</div>
 
+  <div class="wrap">
+    <nav class="nav">
+      <div class="center">
+        <div class="logo-ring">
+          <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg" alt="Profile logo">
+        </div>
+        <div class="status">
+          <span>Available for work</span>
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="menu">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+      </button>
+
+      <div class="menu" id="menu">
+        <ul>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#paintings">Paintings</a></li>
+          <li><a href="#blogs">Blogs</a></li>
+          <li><a href="#hire">Hire me</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="mobile-hero-poster">
+  <div class="text-block">
+    <h1>
+      <span class="word-im">I'M</span>
+      <span class="word-muktadir">MUKTADIR</span>
+      <span class="word-shabab">SHABAB</span>
+      <span class="word-artist">ARTIST</span>
+      <span class="word-writer">Actor And</span>
+      <span class="word-actor">Writer</span>
+    </h1>
+  </div>
+  <img class="person" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756152232/IMG-20250506-WA0014_edit_1110666578519508_xtfpa7.png" alt="Person">
+</div>
+<script>
+  // Start animations after 4 seconds
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.mobile-hero-poster .text-block span').forEach(span => {
+        span.style.animationPlayState = 'running';
+      });
+    }, 4000);
+  });
+</script>
+<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 <div class="about-cards">
 
   <input type="radio" id="radio-1" name="radio-card" checked>
@@ -785,11 +767,9 @@ input:checked +.about-card > .about-img{
       preloader.style.opacity = '0';
       preloader.style.transition = 'opacity 0.5s ease';
       setTimeout(() => preloader.style.display = 'none', 500);
-    }, 4000); // 3000ms = 3 seconds
+    }, 3000); // 3000ms = 3 seconds
   });
-</script>
-
-  <script>
+  
 const btn = document.getElementById('navToggle');
     const menu = document.getElementById('menu');
     btn.addEventListener('click', () => {
