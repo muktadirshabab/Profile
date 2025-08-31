@@ -38,14 +38,13 @@ html, body {
 
 /* pure background noise */
 body {
-  background-color: #fff; /* main base white */
+  background-color: #000; /* solid black base */
   background-image: 
-    linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), /* <<< LIGHT CONTROL */
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' fill='white'/%3E%3C/svg%3E");
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), /* subtle dark overlay */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' fill='gray'/%3E%3C/svg%3E");
   background-size: 200px 200px;
   animation: noiseAnim 1s steps(6) infinite;
 }
-
 @keyframes noiseAnim {
   0%   { background-position: 0 0; }
   20%  { background-position: -40px -60px; }
