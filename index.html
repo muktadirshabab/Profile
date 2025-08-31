@@ -478,7 +478,6 @@ input[type="radio"] {
     white-space: nowrap;
     border-width: 0;
 }
-
 .about-cards {
   --img-w: 200px;
   --duration: 300ms;
@@ -513,6 +512,7 @@ input[type="radio"] {
   width: 400px;
   height: 400px;
 }
+
 .about-card{
   --cards-grid-cols: auto;
   --cards-grid-rows: var(--img-w) auto;
@@ -652,15 +652,8 @@ input:checked +.about-card > .about-img{
     --angle: 0deg;
   }
 }
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	--white: white;
-}
-
 .muktadir-poster-container {
-	min-height: 60vh;
+	min-height: 100vh;
 	display: grid;
 	place-items: center;
 
@@ -682,10 +675,12 @@ input:checked +.about-card > .about-img{
 }
 
 .muktadir-poster {
-	width: 80vmin;
-	height: 90vmin;
+	width: 100%;
+	height: 80vh;
 	position: relative;
+  margin-bottom: 20%;
 	background: url("https://res.cloudinary.com/dxiwnqpja/image/upload/v1756618532/Untitled_design_20250831_113447_0000_oeoiy0.png");
+
 	background-size: cover;
 	background-position: 50% 0%;
 	background-repeat: no-repeat;
@@ -699,19 +694,20 @@ input:checked +.about-card > .about-img{
 	display: flex;
 	align-items: center;
 	height: 100%;
-	width: 40vmin;
+	width: 55vmin;
 	font-family: "Raleway", sans-serif;
-	font-size: 5.5vmin;
-	line-height: 5.5vmin;
+	font-size: 8.5vmin;
+	line-height: 1;
 	text-transform: uppercase;
 	text-align: right;
-	padding-right: 0.3em;
+	padding-right: 0.3rem;
 	position: relative;
 	z-index: 2;
 	color: #fff;
 	background: #8b0000;
 	mix-blend-mode: darken;
 }
+
 .muktadir-poster-quotemark {
 	position: absolute;
 	top: 10vmin;
@@ -810,6 +806,7 @@ input:checked +.about-card > .about-img{
 	</div>
 </div>
 	<br>
+  <br>
 <div class="about-cards">
 
   <input type="radio" id="radio-1" name="radio-card" checked>
