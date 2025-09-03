@@ -3,149 +3,319 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glassmorphism Responsive Page</title>
+<title>Responsive Glassmorphism Navbar</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300&family=Poppins:wght@300&display=swap" rel="stylesheet">
-<!-- Browser toolbar color -->
-<meta name="theme-color" content="#556B2F" id="theme-color-meta">
+<meta name="theme-color" content="#808000" id="theme-color-meta">
 <style>
-/* CSS Variables for Light/Dark Mode */
 :root {
   --bg-color: white;
   --text-color: black;
-  --primary: olive;
-  --secondary: darkolivegreen;
-  --accent: green;
+  --nav-bg-light: rgba(255,255,255,0.2);
+  --nav-bg-dark: rgba(0,0,0,0.4);
+  --menu-bg: #ffffff;
+  --menu-text: #000000;
+  --nav-radius: 50px;
+  --logo-size: 1.5rem;
+  --olive: #808000;
 }
 
 body.dark {
-  --bg-color: black;
-  --text-color: white;
-  --primary: red;
-  --secondary: orange;
-  --accent: yellow;
+  --bg-color: #000;
+  --text-color: #fff;
+  --nav-bg-light: rgba(0,0,0,0.4);
+  --nav-bg-dark: rgba(0,0,0,0.8);
+  --menu-bg: #000000;
+  --menu-text: #ffffff;
+  --olive: #cf622b;
 }
 
-/* Base styles */
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
-/* Glassmorphism Navbar */
-nav {
+/* Navbar */
+nav.nav {
   position: fixed;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.2);
-  border-radius: 50px;
-  padding: 10px 20px;
+  width: 80%;
+  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: background 0.5s ease;
+  padding: 10px 20px;
+  border-radius: var(--nav-radius);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: var(--nav-bg-light);
   z-index: 100;
+  transition: background 0.5s ease;
 }
-body.dark nav { background: rgba(0,0,0,0.4); }
+body.dark nav { background: var(--nav-bg-dark); }
 
 /* Logo */
-nav .logo { 
-  font-family: 'Poppins', sans-serif; 
-  font-weight: 300; /* thin */
-  font-size: 1.8rem; 
+nav .logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: var(--logo-size);
   color: var(--text-color);
 }
 
-/* Menu */
-nav ul {
-  list-style: none;
+/* Toggle button */
+.toggle-btn {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  margin-right: 10px;
   display: flex;
-  gap: 20px;
-  font-family: 'Poppins', sans-serif;
+  align-items: center;
+  justify-content: center;
 }
-nav ul li {
-  cursor: pointer;
-  transition: transform 0.3s;
+.toggle-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-color);
+  transition: all 0.5s ease;
 }
-nav ul li:hover {
-  transform: scale(1.1);
-  color: var(--accent);
-}
+.toggle-btn.rotate svg { transform: rotate(360deg); }
 
-/* Apple-style Hamburger menu */
-.hamburger {
-  width: 30px;
+/* Hamburger */
+.hamburger{
+  width: 28px;
   height: 20px;
-  position: relative;
+  display: inline-grid;
+  align-content: center;
   cursor: pointer;
-  display: none;
+  position: relative;
 }
-.hamburger span {
-  position: absolute;
+.hamburger .line{
   height: 2px;
   width: 100%;
   background: var(--text-color);
-  transition: all 0.4s ease;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  transition: all .35s ease;
 }
-.hamburger span:first-child { top: 0; }
-.hamburger span:last-child { bottom: 0; }
-.hamburger.open span:first-child { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.open span:last-child { transform: rotate(-45deg) translate(5px,-5px); }
+.hamburger .line1{ top: 4px; }
+.hamburger .line2{ bottom: 4px; }
+.hamburger.active .line1{
+  transform: rotate(45deg);
+  top: 9px;
+}
+.hamburger.active .line2{
+  transform: rotate(-45deg);
+  bottom: 9px;
+}
 
-/* Responsive Navbar */
-@media (max-width: 900px) {
-  nav { width: 70%; padding: 10px 15px; }
-  nav ul {
-    position: absolute;
-    top: 60px; /* drop menu a little below navbar */
-    right: 0;
-    background: #8B0000; /* solid blood red */
-    flex-direction: column;
-    width: 100%;
-    padding: 15px 10px;
-    display: none;
-    border-radius: 10px;
-    gap: 15px;
+/* Menu */
+.menu{
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: calc(100% + 50px);
+  background: var(--menu-bg);
+  color: var(--menu-text);
+  border-radius: 10px;
+  z-index: 1000;
+  transform-origin: top;
+  transform: scaleY(0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform .28s ease, opacity .28s ease, visibility .28s step-end;
+}
+.menu.open{
+  transform: scaleY(1);
+  opacity: 1;
+  visibility: visible;
+  transition: transform .38s ease, opacity .38s ease;
+}
+.menu ul{
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.menu a{
+  font-size: 1rem;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  padding: 12px 14px;
+  color: var(--menu-text);
+  text-decoration: none;
+  text-align: center;
+  font-weight: 300;
+  border-radius: 10px;
+  background: var(--menu-bg);
+  transition: color .18s ease, background-color .18s ease, font-weight .18s ease;
+}
+.menu a:hover{
+  color: #fff;
+  background-color: #ff0000;
+}
+
+/* Desktop menu adjustments */
+@media (min-width: 900px){
+  nav.nav{ justify-content: space-between; }
+  .hamburger{ display: none; }
+  .toggle-btn{ display: flex; }
+  .menu{
+    position: static;
+    background: transparent;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
   }
-  nav ul.show { display: flex; }
-  nav ul li { color: white; font-size: 1.1rem; }
-  nav ul li:hover { color: yellow; }
-  .hamburger { display: block; }
+  .menu ul{
+    display: inline-grid;
+    grid-auto-flow: column;
+    gap: 8px;
+    padding: 0;
+  }
+  .menu a{
+    font-weight: 300;
+    background: transparent;
+    padding: 10px 14px;
+  }
+  .menu a:hover{
+    font-weight: 700;
+    color: var(--text-color);
+    background: rgba(255,255,255,0.1);
+  }
 }
-@media (min-width: 901px) and (max-width: 1200px) { nav { width: 70%; } }
-@media (min-width: 1201px) { nav { width: 80%; } }
-
-/* Toggle button */
-.toggle-btn { cursor: pointer; font-size: 1.5rem; transition: transform 0.5s ease; }
-.toggle-btn.rotate { transform: rotate(360deg); }
 
 /* Image container */
-.img-container { margin-top: 120px; } /* more space for navbar */
+.img-container { margin-top: 120px; }
 .img-container img { width: 100%; display: none; transition: all 0.5s ease; }
+ 
+ .word-container {
+  font-family: "Anton", sans-serif; /* Changed font */
+  background: 
+    linear-gradient(135deg,
+      var(--bg-color) 0%,          /* Top-left corner */
+      var(--bg-color) 25%, 
+      var(--olive) 25%,      /* Middle large stripe */
+      var(--olive) 75%, 
+      var(--bg-color) 75%,  /* Bottom-right corner */
+      var(--bg-color) 100%
+    );
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.words {
+  color: var(--olive); /* Changed from white so it's visible on white background */
+  font-size: 1rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.words span {
+  font-size: clamp(4.4rem, 10vw, 15rem); /* Default responsive size for small to medium screens */
+  display: inline-block;
+  animation: move 3s ease-in-out infinite;
+}
+@keyframes move {
+  0% {
+    transform: translateX(-30%);
+  }
+  50% {
+    text-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
+  }
+  100% {
+    transform: translateX(30%);
+  }
+}
+
+/* Animation delays for each word */
+.words span:nth-child(2) { animation-delay: 0.5s; }
+.words span:nth-child(3) { animation-delay: 1s; }
+.words span:nth-child(4) { animation-delay: 1.5s; }
+.words span:nth-child(5) { animation-delay: 2s; }
+.words span:nth-child(6) { animation-delay: 2.5s; }
+.words span:nth-child(7) { animation-delay: 3s; }
+
+/* Optional: Media queries for extreme small screens */
+@media (max-width: 400px) {
+  .words span {
+    font-size: clamp(4.5rem, 10vw, 15rem); /* Smaller font for very small phones */
+  }
+}
+
+/* Large screens: desktops (min-width: 1600px) */
+@media (min-width: 1600px) {
+  .words span {
+    font-size: clamp(15rem, 5vw, 18rem); /* Larger font for big desktops */
+  }
+}
 
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="nav">
   <div class="logo">Muktadir Shabab</div>
-  <div class="hamburger" id="hamburger"><span></span><span></span></div>
-  <ul id="menu">
-    <li>Resume</li>
-    <li>Blog</li>
-    <li>Project</li>
-    <li>Painting</li>
-    <li>Hire me</li>
-  </ul>
-  <div class="toggle-btn" id="toggle">🌓</div>
+  <div style="display:flex; align-items:center;">
+    <div class="toggle-btn" id="toggle">
+      <!-- Sun icon -->
+      <svg id="sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span class="line line1"></span>
+      <span class="line line2"></span>
+    </div>
+  </div>
+  <div class="menu" id="menu">
+    <ul>
+      <li><a href="#">Resume</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Project</a></li>
+      <li><a href="#">Painting</a></li>
+      <li><a href="#">Hire me</a></li>
+    </ul>
+  </div>
 </nav>
+<div class="word-container">
+<div class="words word-1">
+  <span>I</span>
+  <span>'</span>
+  <span>m</span>
+</div>
 
+<div class="words word-2">
+  <span>M</span>
+  <span>U</span>
+  <span>K</span>
+  <span>T</span>
+  <span>A</span>
+  <span>D</span>
+  <span>I</span>
+  <span>R</span>
+</div>
+
+<div class="words word-3">
+  <span>S</span>
+  <span>H</span>
+  <span>A</span>
+  <span>B</span>
+  <span>A</span>
+  <span>B</span>
+</div>
+  </div>
 <div class="img-container">
   <!-- Mobile -->
   <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756900728/Beige_Aesthetic_About_Me_Instagram_Post_20250903_175359_0000_edit_225206299361346_vl0cdf.png" id="mobile-light">
@@ -171,14 +341,13 @@ toggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   toggle.classList.toggle('rotate');
   updateImage();
-  // Browser toolbar color: light = dark olive, dark = red
-  themeMeta.setAttribute('content', darkMode ? '#FF0000' : '#556B2F');
+  themeMeta.setAttribute('content', darkMode ? '#cf622b' : '#808000');
 });
 
-// Hamburger menu open/close
+// Hamburger open/close
 hamburger.addEventListener('click', () => {
-  menu.classList.toggle('show');
-  hamburger.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  menu.classList.toggle('open');
 });
 
 // Update images per device + mode
@@ -198,7 +367,7 @@ function updateImage(){
   else darkMode ? imgs.desktopDark.style.display='block' : imgs.desktopLight.style.display='block';
 }
 
-// Initialize
+// Init
 window.addEventListener('load', updateImage);
 window.addEventListener('resize', updateImage);
 </script>
