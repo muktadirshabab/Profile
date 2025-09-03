@@ -3,898 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Chrome, Edge, Opera, Android -->
-  <meta name="theme-color" content="red">
-
-  <!-- Windows Phone -->
-  <meta name="msapplication-navbutton-color" content="#000000">
-
-  <!-- iOS Safari -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<title>Hero Section - Muktadir</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Glassmorphism Responsive Page</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300&family=Poppins:wght@300&display=swap" rel="stylesheet">
 <style>
+/* CSS Variables for Light/Dark Mode */
 :root {
-  --text-size-desktop: 10rem;
-  --text-size-tablet: 5.5rem;
-  --text-size-mobile: 3.7rem;
-  --main-red: #C19A6B;
-  --shadow-color: rgba(0,0,0,0.9);
+  --bg-color: white;
+  --text-color: black;
+  --primary: olive;
+  --secondary: darkolivegreen;
+  --accent: green;
 }
 
-body {
-  font-family: 'Anton', sans-serif;
-  margin: 0;
-  background: #000; /* optional fallback */
+body.dark {
+  --bg-color: black;
+  --text-color: white;
+  --primary: red;
+  --secondary: orange;
+  --accent: yellow;
 }
-.nav {
+
+/* Base styles */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Glassmorphism Navbar */
+nav {
   position: fixed;
-  top: 0;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 70%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.1); /* glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.2);
   border-radius: 50px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  margin: 20px auto 0;
-  z-index: 1000;
-}
-
-
-    .center{
-      display: grid;
-      grid-auto-flow: column;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-ring{
-      width: 44px;
-      height: 44px;
-      border-radius: 999px;
-      padding: 2px;
-      background: orange; /* yellow border */
-    }
-    .logo-ring img{
-      width: 100%;
-      height: 100%;
-      border-radius: 999px;
-      object-fit: cover;
-    }
-    .status{
-      font-family: 'Montserrat', sans-serif;
-      display: flex;
-      color: white;
-      align-items: center;
-      gap: 8px;
-      font-weight: 300;
-      font-size: 0.9rem;
-    }
- .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffeb3b, #fbc02d); /* light yellow to golden */
-  position: relative;
-}
-
-.dot::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: inherit;
-  border: 2px solid transparent;
-  background: linear-gradient(135deg, rgba(255,235,59,0.6), rgba(251,192,45,0.6));
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: ping 1.8s cubic-bezier(.2,.8,.2,1) infinite;
-}
-
-@keyframes ping {
-  0%   { opacity: .8; transform: scale(0.6); }
-  100% { opacity: 0; transform: scale(1.6); }
-}
-
-    /* Hamburger */
-    .hamburger{
-      margin-left: auto;
-      width: 28px;
-      height: 20px;
-      display: inline-grid;
-      align-content: center;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      position: relative;
-    }
-    .hamburger .line{
-      height: 2px;
-      width: 100%;
-      background: #fff;
-      border-radius: 2px;
-      position: absolute;
-      left: 0;
-      transition: all .35s ease;
-    }
-    .hamburger .line1{ top: 4px; }
-    .hamburger .line2{ bottom: 4px; }
-    .hamburger.active .line1{
-      transform: rotate(45deg);
-      top: 9px;
-    }
-    .hamburger.active .line2{
-      transform: rotate(-45deg);
-      bottom: 9px;
-    }
-
-    /* Menu */
-    .menu{
-      position: absolute;
-      left: 8px;
-      right: 8px;
-      top: calc(100% + 10px);
- background: rgba(255, 255, 255, 0.15); /* semi-transparent base */
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 10%;
-  backdrop-filter: blur(20px) saturate(180%); 
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-      transform-origin: top;
-      transform: scaleY(0.8);
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: transform .28s ease, opacity .28s ease, visibility .28s step-end;
-    }
-    .menu.open{
-      transform: scaleY(1);
-      opacity: 1;
-      visibility: visible;
-      transition: transform .38s ease, opacity .38s ease;
-    }
-    .menu ul{
-      margin: 0;
-      padding: 10px;
-      list-style: none;
-      display: grid;
-      gap: 6px;
-    }
-    .menu a{
-      font-size: 1rem;
-      display: block;
-      font-family: 'Montserrat', sans-serif;
-      padding: 12px 14px;
-      color: #fff;
-      text-decoration: none;
-      text-align: center;
-      font-weight: 300; /* thin by default */
-      border-radius: var(--nav-radius);
-      transition: color .18s ease, background-color .18s ease, font-weight .18s ease;
-    }
-    .menu a:hover{
-      color: black; /* black hover */
-      background-color: rgba(255,255,255,0.04);
-
-    }
-
-    @media (min-width: 900px){
-      .nav{ justify-content: space-between; }
-      .hamburger{ display: none; }
-      .menu{
-        position: static;
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-        transform: none;
-        opacity: 1;
-        visibility: visible;
-      }
-      .menu ul{
-        display: inline-grid;
-        grid-auto-flow: column;
-        gap: 8px;
-        padding: 0;
-        justify-content: center;
-        align-items: center;
-      }
-      .menu a{
-        font-weight: 300; /* thin default on desktop too */
-        border-radius: var(--menu-item-radius);
-        background: transparent;
-        box-shadow: 0 8px 26px rgba(0,0,0,.35);
-        padding: 10px 14px;
-      }
-      .menu a:hover{
-        color: var(--hover);
-        background: rgba(255,255,255,0.04);
-        font-weight: 700; /* bold on hover */
-      }
-    }
-    
-  /* Preloader container */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #2a2726; /* match your site’s dark bg */
+  padding: 10px 20px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 9999; /* on top of everything */
-  box-shadow: 8px 8px 20px #141414, -8px -8px 20px #292929; /* neomorphic effect */
+  justify-content: space-between;
+  transition: background 0.5s ease;
+  z-index: 100;
 }
+body.dark nav { background: rgba(0,0,0,0.4); }
 
-/* M SVG */
-#preloader svg {
-  width: 80px;   /* adjust size as needed */
-  height: 80px;
-  stroke: red;
-  stroke-width: 4;
-  fill: transparent;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: draw 1.5s forwards infinite alternate;
-}
+nav .logo { font-family: 'Anton', sans-serif; font-size: 1.5rem; color: var(--text-color); }
+nav ul { list-style: none; display: flex; gap: 20px; font-family: 'Poppins', sans-serif; }
+nav ul li { cursor: pointer; transition: transform 0.3s; }
+nav ul li:hover { transform: scale(1.1); color: var(--accent); }
 
-/* Stroke animation */
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  #preloader svg {
-    width: 60px;
-    height: 60px;
-    stroke-width: 3;
-  }
-}
-
-@media (max-width: 480px) {
-  #preloader svg {
-    width: 50px;
-    height: 50px;
-    stroke-width: 2.5;
-  }
-}
-.hero-muktadir_____ {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
+/* Apple-style Hamburger menu */
+.hamburger {
+  width: 30px;
+  height: 20px;
   position: relative;
-  overflow: hidden;
-  /* Diagonal split background */
-  background: 
-    linear-gradient(135deg,
-      #000 0%,          /* Top-left corner */
-      #000 25%, 
-      red 25%,      /* Middle large stripe */
-      red 75%, 
-      #000 75%,          /* Bottom-right corner */
-      #000 100%
-    );
+  cursor: pointer;
+  display: none;
 }
-.words {
-  color: red;
-  font-size: 0;
-  line-height: 1.5;
-  margin: 0.5rem 0;
-}
-
-.words span {
-  font-size: var(--text-size-desktop);
-  display: inline-block;
-  animation: move 3s ease-in-out infinite;
-}
-
-@keyframes move {
-  0% { transform: translate(-30%, 0); }
-  50% {
-    text-shadow: 
-      0 5px 15px var(--shadow-color),
-      0 15px 30px rgba(92,64,51,0.85),
-      0 25px 50px rgba(92,64,51,1);
-  }
-  100% { transform: translate(30%, 0); }
-}
-
-/* Responsive font sizes */
-@media (max-width: 1024px) { .words span { font-size: var(--text-size-tablet); } }
-@media (max-width: 768px) { .words span { font-size: var(--text-size-mobile); } }
-
-/* Animation delays */
-.words span:nth-child(2) { animation-delay: 0.5s; }
-.words span:nth-child(3) { animation-delay: 1s; }
-.words span:nth-child(4) { animation-delay: 1.5s; }
-.words span:nth-child(5) { animation-delay: 2s; }
-.words span:nth-child(6) { animation-delay: 2.5s; }
-.words span:nth-child(7) { animation-delay: 3s; }
-.words span:nth-child(8) { animation-delay: 3.5s; }
-
-/* Social icons at bottom */
-.hero-muktadir_____ .social {
+.hamburger span {
   position: absolute;
-  bottom: 20px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-.hero-muktadir_____ .social a {
-  font-size: 1.8rem;
-  color: #fff;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.hero-muktadir_____ .social a {
-  transition: all 0.3s ease-in-out;
-}
-.hover-facebook:hover {
-  transform: scale(1.3);
-  color: #000000; /* black */
-}
-
-.hover-instagram:hover {
-  transform: scale(1.3);
-  color: #000000; /* black */
-}
-
-.hover-dribbble:hover {
-  transform: scale(1.3);
-  background: linear-gradient(to bottom, #000000, #ff0000);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hover-medium:hover,
-.hover-behance:hover {
-  transform: scale(1.3);
-  color: #ff0000; /* red */
-}
-  .muktadir-mobile-img {
-  display: none; /* hidden by default */
-}
-
-.muktadir-mobile-img img {
+  height: 2px;
   width: 100%;
-  height: auto;
-  pointer-events: auto;
-  -webkit-user-drag: none; /* block drag in Safari */
-  user-select: none;       /* block selection */
+  background: var(--text-color);
+  transition: all 0.4s ease;
 }
+.hamburger span:first-child { top: 0; }
+.hamburger span:last-child { bottom: 0; }
+.hamburger.open span:first-child { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:last-child { transform: rotate(-45deg) translate(5px,-5px); }
 
-/* Show only on mobile (max-width: 768px or smaller) */
-@media (max-width: 768px) {
-  .muktadir-mobile-img {
-    display: block;
+/* Responsive Navbar */
+@media (max-width: 900px) {
+  nav { width: 70%; padding: 10px 15px; }
+  nav ul {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: rgba(255,255,255,0.2);
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    display: none;
+    border-radius: 20px;
   }
+  body.dark nav ul { background: rgba(0,0,0,0.4); }
+  nav ul.show { display: flex; }
+  .hamburger { display: block; }
 }
+@media (min-width: 901px) and (max-width: 1200px) { nav { width: 70%; } }
+@media (min-width: 1201px) { nav { width: 80%; } }
+
+/* Toggle button */
+.toggle-btn { cursor: pointer; font-size: 1.5rem; transition: transform 0.5s ease; }
+.toggle-btn.rotate { transform: rotate(360deg); }
+
+/* Image container */
+.img-container { margin-top: 100px; }
+.img-container img { width: 100%; display: none; transition: all 0.5s ease; }
 
 </style>
 </head>
 <body>
 
-  <div id="preloader">
-  <svg viewBox="0 0 100 100">
-    <path d="M 10 90 L 10 10 L 50 50 L 90 10 L 90 90" />
-  </svg>
+<nav>
+  <div class="logo">🌟Logo</div>
+  <div class="hamburger" id="hamburger"><span></span><span></span></div>
+  <ul id="menu">
+    <li>Resume</li>
+    <li>Blog</li>
+    <li>Project</li>
+    <li>Painting</li>
+    <li>Hire me</li>
+  </ul>
+  <div class="toggle-btn" id="toggle">🌓</div>
+</nav>
+
+<div class="img-container">
+  <!-- Mobile -->
+  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756900728/Beige_Aesthetic_About_Me_Instagram_Post_20250903_175359_0000_edit_225206299361346_vl0cdf.png" id="mobile-light">
+  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756900727/Beige_Aesthetic_About_Me_Instagram_Post_20250903_175136_0000_edit_225274768071811_qa1dls.png" id="mobile-dark">
+  <!-- Tablet -->
+  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756278915/My_identity_is-__20250827_131432_0000_xgjnmr.png" id="tablet-light">
+  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756886700/Art_Expo_Poster_Pink_Minimalistic__20250903_134927_0000_edit_211263322137053_jlgpju.png" id="tablet-dark">
+  <!-- Desktop -->
+  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756277976/Hi_I_m_20250827_123457_0000_wqpptg.png" id="desktop-light">
+  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756273034/Hi_I_m_20250827_113617_0000_vp8yc0.png" id="desktop-dark">
 </div>
 
-  <div class="wrap">
-    <nav class="nav">
-      <div class="center">
-        <div class="logo-ring">
-          <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756050794/IMG-20241015-WA0267_edit_161520040162857_egvy8i.jpg" alt="Profile logo">
-        </div>
-        <div class="status">
-          <span>Available for work</span>
-          <span class="dot"></span>
-        </div>
-      </div>
+<script>
+const toggle = document.getElementById('toggle');
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+let darkMode = false;
 
-      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="menu">
-        <span class="line line1"></span>
-        <span class="line line2"></span>
-      </button>
+// Toggle dark/light mode
+toggle.addEventListener('click', () => {
+  darkMode = !darkMode;
+  document.body.classList.toggle('dark');
+  toggle.classList.toggle('rotate');
+  updateImage();
+});
 
-      <div class="menu" id="menu">
-        <ul>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#paintings">Paintings</a></li>
-          <li><a href="#blogs">Blogs</a></li>
-          <li><a href="#hire">Hire me</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-<section class="hero-muktadir_____">
-  <div class="words word-1">
-    <span>I</span><span>'</span><span>m</span>
-  </div>
-  <div class="words word-2">
-    <span>M</span><span>U</span><span>K</span><span>T</span><span>A</span><span>D</span><span>I</span><span>R</span>
-  </div>
-  <div class="words word-3">
-    <span>S</span><span>H</span><span>A</span><span>B</span><span>A</span><span>B</span>
-  </div>
+// Hamburger menu
+hamburger.addEventListener('click', () => {
+  menu.classList.toggle('show');
+  hamburger.classList.toggle('open');
+});
 
-  <div class="social">
-    <a href="#" class="hover-facebook" aria-label="Facebook">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="#" class="hover-instagram" aria-label="Instagram">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="#" class="hover-dribbble" aria-label="Dribbble">
-      <i class="fab fa-dribbble"></i>
-    </a>
-    <a href="#" class="hover-behance" aria-label="Behance">
-      <i class="fab fa-behance"></i>
-    </a>
-    <a href="#" class="hover-medium" aria-label="Medium">
-      <i class="fab fa-medium"></i>
-    </a>
-  </div>
-</section>
-  <a href="https://example.com" class="muktadir-mobile-img">
-
-    <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756870060/Blue_Black_Bold_Modern_New_Fashion_Collection_Poster_20250902_232812_0000_ngmzao.png" alt="Mobile Image" draggable="false" oncontextmenu="return false;">
-
-  </a>
-  <a href="#" class="muktadir-mobile-img">
-
-    <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756870069/Maroon_and_White_Photo_Heavy_Famine_Poverty_Crisis_Hub_Poster_20250902_234317_0000_m2tbjt.png" alt="Mobile Image" draggable="false" oncontextmenu="return false;">
-
-  </a>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    .coontainer{
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
-      padding: 30px 10%;
-    }
-    .coontainer .main-title{
-      max-width: 700px;
-      margin: 0px auto;
-      text-align: center;
-    }
-    .coontainer .main-title h1{
-      position: relative;
-      font-size: 40px;
-      color: #fff;
-      margin-bottom: 30px;
-      display: inline-block;
-      font-family: 'Anton', sans-serif;
-    }
-    .coontainer .main-title h1::before{
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      top: 125%;
-      left: 0;
-      background-color: #000;
-    }
-    .coontainer .main-title h1::after{
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 3px;
-      background-color: #fff;
-      top: calc(125% - 1px);
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .main-title p{
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .coontainer .row{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      margin-top: 70px;
-    }
-    .row .col{
-      flex-basis: 46%;
-    }
-    .row .sub-title h2{
-      position: relative;
-      color: #fff;
-      font-size: 22px;
-      display: inline-block;
-      margin-bottom: 30px;
-      font-family: 'Anton', sans-serif;
-    }
-    .row .sub-title h2::before{
-      content: '';
-      position: absolute;
-      width: 50%;
-      height: 1px;
-      top: 125%;
-      left: 0;
-      background-color: #808080;
-    }
-    .row .sub-title h2::after{
-      content: '';
-      position: absolute;
-      width: 25%;
-      height: 3px;
-      top: calc(125% - 1px);
-      left: 0;
-      background-color: #d03645;
-    }
-    .subject{
-      font-size: 18px;
-      font-weight: 300;
-      color: #fff;
-      padding-bottom: 15px;
-      text-transform: uppercase;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .muktadir-progress{
-      position: relative;
-      width: 100%;
-      height: 7px;
-      background-color: #fff;
-      border-radius: 15px;
-      margin-bottom: 30px;
-      overflow: hidden;
-    }
-    .muktadir-progress::after{
-      position: absolute;
-      content: attr(value);
-      top: -30px;
-      right: 0;
-      color: #fff;
-      font-size: 16px;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .muktadir-progress-line{
-      position: absolute;
-      width: 0;
-      height: 100%;
-      background-color: #d03645;
-      border-radius: 15px;
-      top: 0;
-      left: 0;
-      animation: fillProgress 3s ease forwards;
-    }
-    .muktadir-progress-line::after{
-      content: '';
-      position: absolute;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      top: 50%;
-      left: 100%;
-      transform: translate(-50%, -50%);
-      background-color: #d03645;
-    }
-    @keyframes fillProgress {
-      from { width: 0; }
-      to { width: var(--progress-width); }
-    }
-    @media(max-width: 768px){
-      .coontainer{
-        padding: 30px 8%;
-      }
-    }
-    @media(max-width: 568px){
-      .coontainer .row{
-        flex-direction: column;
-      }
-      .coontainer .main-title h1{
-        font-size: 36px;
-      }
-      .coontainer .row{
-        margin-top: 30px;
-      }
-      .row .col:nth-child(2){
-        margin-top: 20px;
-      }
-    }
-  </style>
-<div class="coontainer">
-    <div class="main-title">
-      <h1>My Skills</h1>
-      <p>
-        I have acquired skills in various fields in the technical, creative, and educational fields. Below is a complete overview of my experience and skills.
-      </p>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="sub-title">
-          <h2>Creative Skills</h2>
-        </div>
-
-        <p class="subject">Painting & Illustration</p>
-        <div class="muktadir-progress" value="5 yr">
-          <div class="muktadir-progress-line" style="--progress-width:98%"></div>
-        </div>
-
-        <p class="subject">Graphic & Web Design</p>
-        <div class="muktadir-progress" value="3 yr">
-          <div class="muktadir-progress-line" style="--progress-width:95%"></div>
-        </div>
-
-        <p class="subject">Content Writing</p>
-        <div class="muktadir-progress" value="4 yr">
-          <div class="muktadir-progress-line" style="--progress-width:90%"></div>
-        </div>
-
-        <p class="subject">Interior & Wall Painting</p>
-        <div class="muktadir-progress" value="3 yr">
-          <div class="muktadir-progress-line" style="--progress-width:95%"></div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="sub-title">
-          <h2>Technical Skills</h2>
-        </div>
-
-        <p class="subject">SEO & Social Management</p>
-        <div class="muktadir-progress" value="80%">
-          <div class="muktadir-progress-line" style="--progress-width:80%"></div>
-        </div>
-
-        <p class="subject">Digital Marketing</p>
-        <div class="muktadir-progress" value="75%">
-          <div class="muktadir-progress-line" style="--progress-width:75%"></div>
-        </div>
-
-        <p class="subject">Office Software</p>
-        <div class="muktadir-progress" value="85%">
-          <div class="muktadir-progress-line" style="--progress-width:85%"></div>
-        </div>
-
-        <p class="subject">Research Paper</p>
-        <div class="muktadir-progress" value="95%">
-          <div class="muktadir-progress-line" style="--progress-width:95%"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;1,400");
-
-.container {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  background: #111;
-  
-  @media (min-width: 1024px) {
-    flex-direction: row;
-  }
+// Update images per device + mode
+function updateImage(){
+  const w = window.innerWidth;
+  const imgs = {
+    mobileLight: document.getElementById('mobile-light'),
+    mobileDark: document.getElementById('mobile-dark'),
+    tabletLight: document.getElementById('tablet-light'),
+    tabletDark: document.getElementById('tablet-dark'),
+    desktopLight: document.getElementById('desktop-light'),
+    desktopDark: document.getElementById('desktop-dark')
+  };
+  Object.values(imgs).forEach(i=>i.style.display='none');
+  if(w <= 900) darkMode ? imgs.mobileDark.style.display='block' : imgs.mobileLight.style.display='block';
+  else if(w <= 1200) darkMode ? imgs.tabletDark.style.display='block' : imgs.tabletLight.style.display='block';
+  else darkMode ? imgs.desktopDark.style.display='block' : imgs.desktopLight.style.display='block';
 }
 
-.item {
-  position: relative;
-  flex: calc(100vw / 6) 1 1;
-  background-size: cover;
-  overflow: hidden;
-  filter: saturate(90%);
-  transition: 1s;
-}
+// Init
+window.addEventListener('load', updateImage);
+window.addEventListener('resize', updateImage);
+</script>
 
-.item:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(25deg, rgba(0,0,0,.9), rgba(0,0,0,0));
-}
-
-.item:not(:last-child) {
-  border-bottom: 1px solid #ccc;
-  animation: borderPulse 5s infinite;
-  
-  @media (min-width: 1024px) {
-    border-right: 1px solid #ccc;
-    border-bottom: none;
-  }
-}
-
-.item:hover {
-  flex-basis: 40%;
-  filter: saturate(120%);
-  
-  @media (min-width: 1024px) {
-    flex-basis: 75%;
-  }
-  
-  .quote {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.item:nth-child(1) {
-  background-image: url("https://cdn.wallpapersafari.com/41/38/ruKsD7.jpg");
-  background-position: 72% 35%;
-}
-
-.item:nth-child(2) {
-  background-image: url("https://fr.web.img6.acsta.net/r_1920_1080/pictures/19/06/03/11/14/3505525.jpg");
-  background-position: 60% 8%;
-}
-
-.item:nth-child(3) {
-  background-image: url("https://images8.alphacoders.com/101/1012160.jpg");
-  background-position: 52% 8%;
-}
-
-.item:nth-child(4) {
-  background-image: url("https://img1.wallspic.com/attachments/originals/6/2/8/5/6/165826-thanos_the_mad-3840x2160.jpg");
-  background-position: 45% 8%;
-}
-
-.item:nth-child(5) {
-  background-image: url("https://c.wallhere.com/photos/df/a3/1920x1080_px_Iron_man_Iron_Man_3_Robert_Downey_Jr_sea_Tony_Stark-514897.jpg!d");
-  background-position: 45% 25%;
-}
-
-.item:nth-child(6) {
-  background-image: url("https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/05/Tilda-Swinton-as-the-Ancient-One-in-Doctor-Strange.jpg");
-  background-position: 65% 2%;
-}
-
-.quote {
-  position: absolute;
-  color: #fff;
-  bottom: 35%;
-  left: 5rem;
-  width: calc(100% - 10rem);
-  opacity: 0;
-  transition: 1s;
-  transform: translateX(50%);
-  
-  @media (min-width: 512px) {
-    left: 15%;
-    bottom: 35%;
-    width: 20vw;
-  }
-  
-  @media (min-width: 1024px) {
-    left: 15%;
-    bottom: 35%;
-    width: 30vw;
-  }
-  
-  p {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1.7rem;
-    font-size: 1.4rem;
-    text-wrap: balance;
-    font-style: italic;
-    
-    &:before, &:after {
-      position: absolute;
-      font-size: 5.5rem;
-      opacity: .6;
-    }
-    
-    &:before {
-      content: "“";
-      top: 4rem;
-      left: -2rem;
-      transform: translate(-100%, -100%);
-    }
-    
-    &:after {
-      content: "”";
-      bottom: 2rem;
-      right: -2rem;
-      transform: translate(100%, 100%);
-    }
-  }
-  
-  span {
-    position: absolute;
-    bottom: -2rem;
-    right: 0;
-    text-align: right;
-    font-size: 1.2rem;
-    font-weight: bold;
-    transform: translate(4rem, 100%);
-    
-    &:before {
-      content: "—";
-      margin-right: .7rem;
-    }
-  }
-}
-
-@keyframes borderPulse{
-  0%, 100% { border-color: rgba(204, 204, 204, 1); }
-  25%, 75% { border-color: rgba(204, 204, 255, 0.9); }
-  50% { border-color: rgba(204, 204, 255, 0.5); }
-}
-  </style>
-
-<div class="container">
-  <div class="item">
-    <div class="quote">
-      <p>I am Groot.<span>Groot</span></p>
-    </div>
-  </div>
-  <div class="item">
-    <div class="quote">
-      <p>You'r the head of security and your password is 'password'&nbsp;?<span>Peter Parker</span></p>
-    </div>
-  </div>
-  <div class="item">
-    <div class="quote">
-      <p>That really is America's ass.<span>Captain America</span></p>
-    </div>
-  </div>
-  <div class="item">
-    <div class="quote">
-      <p>The hardest choices require the strongest wills.<span>Thanos</span></p>
-    </div>
-  </div>
-  <div class="item">
-    <div class="quote">
-      <p>Genius, billionaire, playboy, philanthropist.<span>Tony Stark</span></p>
-    </div>
-  </div>
-  <div class="item">
-    <div class="quote">
-      <p>We never lose our demons. We only learn to live above them.<span>Ancient One</span></p>
-    </div>
-  </div>
-</div>
-  <script>
-// Wait 5 seconds before hiding preloader
-  window.addEventListener('load', () => {
-    const preloader = document.getElementById('preloader');
-
-    setTimeout(() => {
-      preloader.style.opacity = '0';
-      preloader.style.transition = 'opacity 0.5s ease';
-      setTimeout(() => preloader.style.display = 'none', 500);
-    }, 3000); // 3000ms = 3 seconds
-  });
-  
-const btn = document.getElementById('navToggle');
-    const menu = document.getElementById('menu');
-    btn.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('open');
-      btn.classList.toggle('active', isOpen);
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    }); 
-  </script>
 </body>
 </html>
