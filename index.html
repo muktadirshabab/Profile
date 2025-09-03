@@ -339,17 +339,6 @@ nav .logo {
   <span>B</span>
 </div>
   </div>
-<div class="img-container">
-  <!-- Mobile -->
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213455_0000_veg5nn.png" id="mobile-light">
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213717_0000_edit_239470206586811_cpp2ct.png" id="mobile-dark">
-  <!-- Tablet -->
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756278915/My_identity_is-__20250827_131432_0000_xgjnmr.png" id="tablet-light">
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756886700/Art_Expo_Poster_Pink_Minimalistic__20250903_134927_0000_edit_211263322137053_jlgpju.png" id="tablet-dark">
-  <!-- Desktop -->
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915093/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215052_0000_edit_239378238530806_hntkzp.png" id="desktop-light">
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215629_0000_edit_239643454588899_plme2h.png" id="desktop-dark">
-</div>
   <div class="img-container">
   <!-- Mobile -->
   <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917291/Beige_And_White_Aesthetic_Photo_Collage_Phone_Wallpaper_20250903_222939_0000_edit_241843759445645_culjnv.png" id="mobile-light">
@@ -368,6 +357,40 @@ const menu = document.getElementById('menu');
 const themeMeta = document.getElementById('theme-color-meta');
 let darkMode = false;
 
+// Image groups
+const images = {
+  mobileLight: [
+    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213455_0000_veg5nn.png',
+    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917291/Beige_And_White_Aesthetic_Photo_Collage_Phone_Wallpaper_20250903_222939_0000_edit_241843759445645_culjnv.png',
+    '',
+    '',
+    ''
+  ],
+  mobileDark: [
+    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213717_0000_edit_239470206586811_cpp2ct.png',
+    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917289/1756917111454_edit_241783522161719_fqw0wa.jpg',
+    '',
+    '',
+    ''
+  ],
+  tabletLight: ['', '', '', '', ''],
+  tabletDark: ['', '', '', '', ''],
+  desktopLight: [
+    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915093/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215052_0000_edit_239378238530806_hntkzp.png',
+    '',
+    '',
+    '',
+    ''
+  ],
+  desktopDark: [
+    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215629_0000_edit_239643454588899_plme2h.png',
+    '',
+    '',
+    '',
+    ''
+  ]
+};
+
 // Toggle dark/light mode
 toggle.addEventListener('click', () => {
   darkMode = !darkMode;
@@ -383,21 +406,45 @@ hamburger.addEventListener('click', () => {
   menu.classList.toggle('open');
 });
 
+// Prevent page jump for menu links
+menu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    hamburger.classList.remove('active');
+    menu.classList.remove('open');
+  });
+});
+
+// Prevent page jump for image links
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.img-container a[href="#"]')) {
+    e.preventDefault();
+  }
+});
+
 // Update images per device + mode
-function updateImage(){
+function updateImage() {
+  const container = document.querySelector('.img-container');
+  container.innerHTML = ''; // clear previous images
   const w = window.innerWidth;
-  const imgs = {
-    mobileLight: document.getElementById('mobile-light'),
-    mobileDark: document.getElementById('mobile-dark'),
-    tabletLight: document.getElementById('tablet-light'),
-    tabletDark: document.getElementById('tablet-dark'),
-    desktopLight: document.getElementById('desktop-light'),
-    desktopDark: document.getElementById('desktop-dark')
-  };
-  Object.values(imgs).forEach(i=>i.style.display='none');
-  if(w <= 900) darkMode ? imgs.mobileDark.style.display='block' : imgs.mobileLight.style.display='block';
-  else if(w <= 1200) darkMode ? imgs.tabletDark.style.display='block' : imgs.tabletLight.style.display='block';
-  else darkMode ? imgs.desktopDark.style.display='block' : imgs.desktopLight.style.display='block';
+  let imgsArray;
+
+  if(w <= 900) imgsArray = darkMode ? images.mobileDark : images.mobileLight;
+  else if(w <= 1200) imgsArray = darkMode ? images.tabletDark : images.tabletLight;
+  else imgsArray = darkMode ? images.desktopDark : images.desktopLight;
+
+  imgsArray.forEach(src => {
+    if(src) { 
+      const a = document.createElement('a');
+      a.href = '#'; // keep placeholder link
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.display = 'block';
+      img.style.transition = 'all 0.5s ease';
+      a.appendChild(img);
+      container.appendChild(a);
+    }
+  });
 }
 
 // Init
