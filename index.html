@@ -284,6 +284,25 @@ nav .logo {
     font-size: clamp(15rem, 5vw, 18rem); /* Larger font for big desktops */
   }
 }
+.img-container {
+  position: relative;
+}
+
+.img-container img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none; /* not clickable */
+  width: 100%;
+  display: block;
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10;
+  background: transparent;  /* invisible layer */
+  display: block;
+}
 
 </style>
 </head>
@@ -339,16 +358,10 @@ nav .logo {
 </div>
   </div>
   <div class="img-container">
-  <!-- Mobile -->
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917291/Beige_And_White_Aesthetic_Photo_Collage_Phone_Wallpaper_20250903_222939_0000_edit_241843759445645_culjnv.png" id="mobile-light">
-  <img src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917289/1756917111454_edit_241783522161719_fqw0wa.jpg" id="mobile-dark">
-  <!-- Tablet -->
-  <img src="" id="tablet-light">
-  <img src="" id="tablet-dark">
-  <!-- Desktop -->
-  <img src="" id="desktop-light">
-  <img src="" id="desktop-dark">
+  <!-- Images get injected here -->
+  <a href="https://your-link.com" target="_blank" class="img-overlay"></a>
 </div>
+
 <script>
 const toggle = document.getElementById('toggle');
 const hamburger = document.getElementById('hamburger');
@@ -421,30 +434,29 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// Update images per device + mode
 function updateImage() {
   const container = document.querySelector('.img-container');
-  container.innerHTML = ''; // clear previous images
+  const overlay = container.querySelector('.img-overlay');
+  container.innerHTML = ''; // clear
+  container.appendChild(overlay); // put overlay back on top
+
   const w = window.innerWidth;
   let imgsArray;
 
-  if(w <= 900) imgsArray = darkMode ? images.mobileDark : images.mobileLight;
-  else if(w <= 1200) imgsArray = darkMode ? images.tabletDark : images.tabletLight;
+  if (w <= 900) imgsArray = darkMode ? images.mobileDark : images.mobileLight;
+  else if (w <= 1200) imgsArray = darkMode ? images.tabletDark : images.tabletLight;
   else imgsArray = darkMode ? images.desktopDark : images.desktopLight;
 
   imgsArray.forEach(src => {
-    if(src) { 
-      const a = document.createElement('a');
-      a.href = '#'; // keep placeholder link
-      const img = document.createElement('img');
-      img.src = src;
-      img.style.display = 'block';
-      img.style.transition = 'all 0.5s ease';
-      a.appendChild(img);
-      container.appendChild(a);
-    }
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.transition = 'all 0.5s ease';
+    img.setAttribute('draggable', 'false');
+    img.setAttribute('oncontextmenu', 'return false');
+    container.insertBefore(img, overlay); // always under overlay
   });
 }
+
 
 // Init
 window.addEventListener('load', updateImage);
