@@ -10,28 +10,29 @@
   <meta name="keywords" content="Muktadir Shabab, Artist, Writer, Actor, Director, Designer, Digital Marketer, Creative Portfolio, Modern Design">
   <meta name="author" content="Muktadir Shabab">
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756926243/20250904_005348_0000_paxlof.png" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756926243/20250904_005348_0000_paxlof.png" />
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://muktadirshabab.github.io/Profile/">
-<meta property="og:title" content="Muktadir Shabab | Artist, Writer, Actor & Designer">
-<meta property="og:description" content="Explore the creative world of Muktadir Shabab — Artist, Writer, Actor, Director, Designer, and Digital Marketer.">
-<meta property="og:image" content="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756926243/I_m_Muktadir_Shabab._Artist_Actor_Writer_and_Designer._I_will_try_to_satisf_20250904_010301_0000_d1jpu6.png" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://muktadirshabab.github.io/Profile/">
+  <meta property="og:title" content="Muktadir Shabab | Artist, Writer, Actor & Designer">
+  <meta property="og:description" content="Explore the creative world of Muktadir Shabab — Artist, Writer, Actor, Director, Designer, and Digital Marketer.">
+  <meta property="og:image" content="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756926243/I_m_Muktadir_Shabab._Artist_Actor_Writer_and_Designer._I_will_try_to_satisf_20250904_010301_0000_d1jpu6.png" />
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://muktadirshabab.github.io/Profile/">
-<meta name="twitter:title" content="Muktadir Shabab | Artist, Writer, Actor & Designer">
-<meta name="twitter:description" content="Explore the creative world of Muktadir Shabab — Artist, Writer, Actor, Director, Designer, and Digital Marketer.">
-<meta name="twitter:image" content="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756926243/I_m_Muktadir_Shabab._Artist_Actor_Writer_and_Designer._I_will_try_to_satisf_20250904_010301_0000_d1jpu6.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://muktadirshabab.github.io/Profile/">
+  <meta name="twitter:title" content="Muktadir Shabab | Artist, Writer, Actor & Designer">
+  <meta name="twitter:description" content="Explore the creative world of Muktadir Shabab — Artist, Writer, Actor, Director, Designer, and Digital Marketer.">
+  <meta name="twitter:image" content="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756926243/I_m_Muktadir_Shabab._Artist_Actor_Writer_and_Designer._I_will_try_to_satisf_20250904_010301_0000_d1jpu6.png" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300&family=Poppins:wght@300&display=swap" rel="stylesheet">
 
   <!-- Browser Theme Color -->
   <meta name="theme-color" content="#808000" id="theme-color-meta">
+
 <style>
 :root {
   --bg-color: white;
@@ -44,14 +45,6 @@
   --logo-size: 1rem;
   --olive: #808000;
 }
-  html {
-  scroll-behavior: smooth;
-}
-
-body {
-  overscroll-behavior: none;   /* stops auto top jumpiness */
-}
-
 body.dark {
   --bg-color: #000;
   --text-color: #fff;
@@ -68,6 +61,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background 0.5s ease, color 0.5s ease;
+  scroll-behavior: smooth;
 }
 
 /* Navbar */
@@ -223,19 +217,16 @@ nav .logo {
   }
 }
 
-/* Image container */
-.img-container { margin-top: 0px; }
-.img-container img { width: 100%; display: none; transition: all 0.5s ease; }
- 
- .word-container {
-  font-family: "Anton", sans-serif; /* Changed font */
+/* Word animation */
+.word-container {
+  font-family: "Anton", sans-serif;
   background: 
     linear-gradient(120deg,
-      var(--bg-color) 0%,          /* Top-left corner */
+      var(--bg-color) 0%,          
       var(--bg-color) 25%, 
-      var(--olive) 25%,      /* Middle large stripe */
+      var(--olive) 25%,      
       var(--olive) 75%, 
-      var(--bg-color) 75%,  /* Bottom-right corner */
+      var(--bg-color) 75%,  
       var(--bg-color) 100%
     );
   display: flex;
@@ -245,32 +236,22 @@ nav .logo {
   align-items: center;
   padding: 0 1rem;
 }
-
 .words {
-  color: var(--olive); /* Changed from white so it's visible on white background */
+  color: var(--olive);
   font-size: 1rem;
   line-height: 1;
   text-align: center;
 }
-
 .words span {
-  font-size: clamp(4.4rem, 10vw, 15rem); /* Default responsive size for small to medium screens */
+  font-size: clamp(4.4rem, 10vw, 15rem);
   display: inline-block;
   animation: move 3s ease-in-out infinite;
 }
 @keyframes move {
-  0% {
-    transform: translateX(-30%);
-  }
-  50% {
-    text-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
-  }
-  100% {
-    transform: translateX(30%);
-  }
+  0% { transform: translateX(-30%); }
+  50% { text-shadow: 0 25px 50px rgba(0, 0, 0, 0.75); }
+  100% { transform: translateX(30%); }
 }
-
-/* Animation delays for each word */
 .words span:nth-child(2) { animation-delay: 0.5s; }
 .words span:nth-child(3) { animation-delay: 1s; }
 .words span:nth-child(4) { animation-delay: 1.5s; }
@@ -278,39 +259,24 @@ nav .logo {
 .words span:nth-child(6) { animation-delay: 2.5s; }
 .words span:nth-child(7) { animation-delay: 3s; }
 
-/* Optional: Media queries for extreme small screens */
-@media (max-width: 400px) {
-  .words span {
-    font-size: clamp(4.5rem, 10vw, 15rem); /* Smaller font for very small phones */
-  }
-}
-
-/* Large screens: desktops (min-width: 1600px) */
-@media (min-width: 1600px) {
-  .words span {
-    font-size: clamp(15rem, 5vw, 18rem); /* Larger font for big desktops */
-  }
-}
-.img-container {
+/* Images */
+.img-container { margin-top: 0; }
+.img-wrapper {
   position: relative;
+  display: block;
 }
-
-.img-container img {
-  -webkit-user-drag: none;
-  user-drag: none;
-  pointer-events: none; /* not clickable */
+.img-wrapper img {
   width: 100%;
   display: block;
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
 }
-
-.img-overlay {
+.img-guard {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 10;
-  background: transparent;  /* invisible layer */
-  display: block;
+  top:0; left:0; right:0; bottom:0;
+  background: transparent;
 }
-
 </style>
 </head>
 <body>
@@ -320,7 +286,7 @@ nav .logo {
   <div style="display:flex; align-items:center;">
     <div class="toggle-btn" id="toggle">
       <!-- Sun icon -->
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle cx="12" cy="12" r="6" stroke="#1C274C" stroke-width="1.5"></circle> <path d="M12 2V3" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M12 21V22" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M22 12L21 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M3 12L2 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M19.0708 4.92969L18.678 5.32252" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M5.32178 18.6777L4.92894 19.0706" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M19.0708 19.0703L18.678 18.6775" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path opacity="0.5" d="M5.32178 5.32227L4.92894 4.92943" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="6" stroke="#1C274C" stroke-width="1.5"></circle><path d="M12 2V3" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path><path d="M12 21V22" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path><path d="M22 12L21 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path><path d="M3 12L2 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path></svg>
     </div>
     <div class="hamburger" id="hamburger">
       <span class="line line1"></span>
@@ -337,36 +303,65 @@ nav .logo {
     </ul>
   </div>
 </nav>
+
 <div class="word-container">
-<div class="words word-1">
-  <span>I</span>
-  <span>'</span>
-  <span>m</span>
+  <div class="words"><span>I</span><span>'</span><span>m</span></div>
+  <div class="words"><span>M</span><span>U</span><span>K</span><span>T</span><span>A</span><span>D</span><span>I</span><span>R</span></div>
+  <div class="words"><span>S</span><span>H</span><span>A</span><span>B</span><span>A</span><span>B</span></div>
 </div>
 
-<div class="words word-2">
-  <span>M</span>
-  <span>U</span>
-  <span>K</span>
-  <span>T</span>
-  <span>A</span>
-  <span>D</span>
-  <span>I</span>
-  <span>R</span>
-</div>
+<div class="img-container">
+  <!-- Mobile Light -->
+  <a href="LINK1" target="_blank" class="img-wrapper">
+    <img class="mobile light" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213455_0000_veg5nn.png">
+    <div class="img-guard"></div>
+  </a>
+  <a href="LINK2" target="_blank" class="img-wrapper">
+    <img class="mobile light" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917291/Beige_And_White_Aesthetic_Photo_Collage_Phone_Wallpaper_20250903_222939_0000_edit_241843759445645_culjnv.png">
+    <div class="img-guard"></div>
+  </a>
 
-<div class="words word-3">
-  <span>S</span>
-  <span>H</span>
-  <span>A</span>
-  <span>B</span>
-  <span>A</span>
-  <span>B</span>
-</div>
-  </div>
-  <div class="img-container">
-  <!-- Images get injected here -->
-  <a href="https://your-link.com" target="_blank" class="img-overlay"></a>
+  <!-- Mobile Dark -->
+  <a href="LINK3" target="_blank" class="img-wrapper">
+    <img class="mobile dark" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213717_0000_edit_239470206586811_cpp2ct.png">
+    <div class="img-guard"></div>
+  </a>
+  <a href="LINK4" target="_blank" class="img-wrapper">
+    <img class="mobile dark" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917289/1756917111454_edit_241783522161719_fqw0wa.jpg">
+    <div class="img-guard"></div>
+  </a>
+
+  <!-- Tablet Light -->
+  <a href="LINK5" target="_blank" class="img-wrapper">
+    <img class="tablet light" src="TABLET_LIGHT_IMG_1.png">
+    <div class="img-guard"></div>
+  </a>
+  <a href="LINK6" target="_blank" class="img-wrapper">
+    <img class="tablet light" src="TABLET_LIGHT_IMG_2.png">
+    <div class="img-guard"></div>
+  </a>
+
+  <!-- Tablet Dark -->
+  <a href="LINK7" target="_blank" class="img-wrapper">
+    <img class="tablet dark" src="TABLET_DARK_IMG_1.png">
+    <div class="img-guard"></div>
+  </a>
+  <a href="LINK8" target="_blank" class="img-wrapper">
+    <img class="tablet dark" src="TABLET_DARK_IMG_2.png">
+    <div class="img-guard"></div>
+  </a>
+
+  <!-- Desktop Light -->
+  <a href="LINK9" target="_blank" class="img-wrapper">
+    <img class="desktop light" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915093/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215052_0000_edit_239378238530806_hntkzp.png">
+    <div class="img-guard"></div>
+  </a>
+
+  <!-- Desktop Dark -->
+  <a href="LINK10" target="_blank" class="img-wrapper">
+    <img class="desktop dark" src="https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215629_0000_edit_239643454588899_plme2h.png">
+    <div class="img-guard"></div>
+  </a>
 </div>
 
 <script>
@@ -376,98 +371,38 @@ const menu = document.getElementById('menu');
 const themeMeta = document.getElementById('theme-color-meta');
 let darkMode = false;
 
-// Image groups
-const images = {
-  mobileLight: [
-    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213455_0000_veg5nn.png',
-    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917291/Beige_And_White_Aesthetic_Photo_Collage_Phone_Wallpaper_20250903_222939_0000_edit_241843759445645_culjnv.png',
-    '',
-    '',
-    ''
-  ],
-  mobileDark: [
-    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Beige_Aesthetic_About_Me_Instagram_Post_20250903_213717_0000_edit_239470206586811_cpp2ct.png',
-    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756917289/1756917111454_edit_241783522161719_fqw0wa.jpg',
-    '',
-    '',
-    ''
-  ],
-  tabletLight: ['', '', '', '', ''],
-  tabletDark: ['', '', '', '', ''],
-  desktopLight: [
-    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915093/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215052_0000_edit_239378238530806_hntkzp.png',
-    '',
-    '',
-    '',
-    ''
-  ],
-  desktopDark: [
-    'https://res.cloudinary.com/dxiwnqpja/image/upload/v1756915089/Pink_Beige_and_Black_Creative_Portfolio_Animated_Presentation_20250903_215629_0000_edit_239643454588899_plme2h.png',
-    '',
-    '',
-    '',
-    ''
-  ]
-};
-
 // Toggle dark/light mode
 toggle.addEventListener('click', () => {
   darkMode = !darkMode;
   document.body.classList.toggle('dark');
   toggle.classList.toggle('rotate');
-  updateImage();
   themeMeta.setAttribute('content', darkMode ? '#cf622b' : '#808000');
+  updateImages();
 });
 
-// Hamburger open/close
+// Hamburger menu
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('active');
   menu.classList.toggle('open');
 });
 
-// Prevent page jump for menu links
-menu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    hamburger.classList.remove('active');
-    menu.classList.remove('open');
-  });
-});
-
-// Prevent page jump for image links
-document.addEventListener('click', (e) => {
-  if (e.target.closest('.img-container a[href="#"]')) {
-    e.preventDefault();
-  }
-});
-
-function updateImage() {
-  const container = document.querySelector('.img-container');
-  const overlay = container.querySelector('.img-overlay');
-  container.innerHTML = ''; // clear
-  container.appendChild(overlay); // put overlay back on top
-
+// Show only the right images
+function updateImages() {
   const w = window.innerWidth;
-  let imgsArray;
-
-  if (w <= 900) imgsArray = darkMode ? images.mobileDark : images.mobileLight;
-  else if (w <= 1200) imgsArray = darkMode ? images.tabletDark : images.tabletLight;
-  else imgsArray = darkMode ? images.desktopDark : images.desktopLight;
-
-  imgsArray.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.style.transition = 'all 0.5s ease';
-    img.setAttribute('draggable', 'false');
-    img.setAttribute('oncontextmenu', 'return false');
-    container.insertBefore(img, overlay); // always under overlay
+  const all = document.querySelectorAll('.img-wrapper');
+  all.forEach(wrap => {
+    const img = wrap.querySelector('img');
+    let show = false;
+    if (w <= 900) show = img.classList.contains('mobile');
+    else if (w <= 1200) show = img.classList.contains('tablet');
+    else show = img.classList.contains('desktop');
+    if (darkMode) show = show && img.classList.contains('dark');
+    else show = show && img.classList.contains('light');
+    wrap.style.display = show ? 'block' : 'none';
   });
 }
-
-
-// Init
-window.addEventListener('load', updateImage);
-window.addEventListener('resize', updateImage);
+window.addEventListener('load', updateImages);
+window.addEventListener('resize', updateImages);
 </script>
 
 </body>
